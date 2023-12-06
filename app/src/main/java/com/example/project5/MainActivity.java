@@ -18,4 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, BYOActivity.class);
         startActivity(intent);
     }
+
+    public void displaySpecialtyActivity(View view){
+        Intent intent = new Intent(MainActivity.this, SpecialtyActivity.class);
+        startActivity(intent);
+    }
 }

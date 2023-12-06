@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:text="TextView"
+        android:text="Size"
         app:layout_constraintEnd_toEndOf="@+id/pizzaSizeSpinner"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="@+id/pizzaSizeSpinner"
@@ -31,8 +31,10 @@
         android:layout_height="311dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/extraSauceCheckBox" />
+        app:layout_constraintTop_toBottomOf="@+id/extraSauceCheckBox"
+        app:layout_constraintVertical_bias="0.03" />
 
     <CheckBox
         android:id="@+id/extraCheeseCheckBox"
@@ -55,32 +57,65 @@
         app:layout_constraintStart_toStartOf="@+id/extraCheeseCheckBox"
         app:layout_constraintTop_toBottomOf="@+id/extraCheeseCheckBox" />
 
-    <RadioButton
-        android:id="@+id/tomatoRadio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
-        android:layout_marginEnd="44dp"
-        android:text="Tomato"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RadioButton
-        android:id="@+id/alfredoRadio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Alfredo"
-        app:layout_constraintEnd_toEndOf="@+id/tomatoRadio"
-        app:layout_constraintStart_toStartOf="@+id/tomatoRadio"
-        app:layout_constraintTop_toBottomOf="@+id/tomatoRadio" />
-
     <ListView
+        android:id="@+id/listView"
         android:layout_width="167dp"
         android:layout_height="311dp"
-        android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alfredoRadio" />
+        tools:layout_editor_absoluteY="261dp" />
+
+    <RadioGroup
+        android:id="@+id/sauceRadioGroup"
+        android:layout_width="140dp"
+        android:layout_height="131dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.878"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.198">
+
+        <RadioButton
+            android:id="@+id/tomatoRadio"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:text="Tomato" />
+
+        <RadioButton
+            android:id="@+id/alfredoRadio"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="Alfredo" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="133dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="24dp"
+        android:text="Add To Order"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listView"
+        app:layout_constraintVertical_bias="0.63" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="128dp"
+        android:layout_height="67dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.711"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button"
+        app:layout_constraintVertical_bias="0.0">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Total" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
