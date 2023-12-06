@@ -3,7 +3,6 @@ package com.example.project5;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,30 +87,13 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
 
         public ItemsHolder( View itemView) {
             super(itemView);
-            pizza_name = itemView.findViewById(R.id.tv_flavor);
-            pizza_price = itemView.findViewById(R.id.tv_price);
+            pizza_name = itemView.findViewById(R.id.pizza_type);
+            pizza_price = itemView.findViewById(R.id.pizza_price);
             im_item = itemView.findViewById(R.id.im_item);
             btn_add = itemView.findViewById(R.id.btn_add);
             parentLayout = itemView.findViewById(R.id.rowLayout);
             setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
 
-            /* set onClickListener for the row layout,
-             * clicking on a row will navigate to another Activity
-             */
-            parentLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(itemView.getContext(), ItemSelectedActivity.class);
-                    intent.putExtra("ITEM", pizza_name.getText());
-                    itemView.getContext().startActivity(intent);
-                }
-            });
-            /* Alternatively, use a lamda expression to set the onClickListener for the row layout
-            parentLayout.setOnClickListener(view -> {
-                    Intent intent = new Intent(itemView.getContext(), ItemSelectedActivity.class);
-                    intent.putExtra("ITEM", tv_name.getText());
-                    itemView.getContext().startActivity(intent);
-                }); */
         }
 
         /**
