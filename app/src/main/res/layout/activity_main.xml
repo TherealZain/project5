@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#000000"
+                android:onClick="displayCurrentOrderActivity"
                 app:srcCompat="@drawable/current_order" />
         </LinearLayout>
 
@@ -95,6 +96,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#000000"
+                android:onClick="displayStoreOrdersActivity"
                 app:srcCompat="@drawable/store_orders" />
         </LinearLayout>
     </LinearLayout>
