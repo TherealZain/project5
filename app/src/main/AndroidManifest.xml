@@ -23,6 +23,8 @@
         </activity>
         <activity android:name=".BYOActivity"></activity>
         <activity android:name=".SpecialtyActivity"></activity>
+        <activity android:name=".CurrentOrderActivity"></activity>
+        <activity android:name=".StoreOrdersActivity"></activity>
     </application>
 
 </manifest>

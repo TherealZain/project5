@@ -23,4 +23,16 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, SpecialtyActivity.class);
         startActivity(intent);
     }
+
+    public void displayCurrentOrderActivity(View view){
+        Intent intent = new Intent(MainActivity.this, CurrentOrderActivity.class);
+        startActivity(intent);
+    }
+
+    public void displayStoreOrdersActivity(View view){
+        Intent intent = new Intent(MainActivity.this, StoreOrdersActivity.class);
+        startActivity(intent);
+    }
+
+
 }
