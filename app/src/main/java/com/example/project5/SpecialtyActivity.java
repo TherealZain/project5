@@ -1,17 +1,30 @@
 package com.example.project5;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project5.enums.Size;
 import com.example.project5.pizzas.Pizza;
 
 import java.util.ArrayList;
 
 public class SpecialtyActivity extends AppCompatActivity {
+
+    private static Order currOrder = Order.getInstance();
+    private static final int PIZZA_NAME_INDEX = 0;
+    private static final int PIZZA_PRICE_INDEX = 1;
+    private static final int PIZZA_SAUCE_INDEX = 2;
+    private static final int PIZZA_CHEESE_INDEX = 3;
+    private static final int PIZZA_QUANTITY_INDEX = 4;
+    private static final int PIZZA_SIZE_SPINNER = 5;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +38,26 @@ public class SpecialtyActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.specialtyView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+    }
+
+    public static void addPizzaToOrder(View[] pizzaProps){
+        int numOfPizzas = Integer.parseInt(((EditText)
+                pizzaProps[PIZZA_QUANTITY_INDEX]).getText().toString());
+        TextView pizzaTypeView = (TextView) pizzaProps[PIZZA_NAME_INDEX];
+        Spinner sizeSpinner = (Spinner) pizzaProps[PIZZA_SIZE_SPINNER];
+        CheckBox extraSauceBox = (CheckBox) pizzaProps[PIZZA_SAUCE_INDEX];
+        CheckBox extraCheeseBox = (CheckBox) pizzaProps[PIZZA_CHEESE_INDEX];
+        String pizzaType = pizzaTypeView.getText().toString();
+        String size = sizeSpinner.getSelectedItem().toString();
+        boolean extraSauce = extraSauceBox.isSelected();
+        boolean extraCheese = extraCheeseBox.isSelected();
+        for(int i =0; i < numOfPizzas; i++){
+            Pizza pizza = PizzaMaker.createPizza(pizzaType);
+            pizza.setSize(Size.valueOf(size.toUpperCase()));
+            pizza.setExtraSauce(extraSauce);
+            pizza.setExtraCheese(extraCheese);
+            currOrder.addToOrder(pizza);
+        }
     }
 
     private ArrayList<Item> fillItemArrays(){

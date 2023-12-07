@@ -6,10 +6,15 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.os.Bundle;
 
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -50,7 +55,7 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_view, parent, false);
 
-        return new ItemsHolder(view);
+        return new ItemsHolder(view, context);
     }
 
     /**
@@ -82,22 +87,41 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
      */
     public static class ItemsHolder extends RecyclerView.ViewHolder {
         private TextView pizza_name, pizza_price, toppingsDisplay;
+        private CheckBox sauceBox, cheeseBox;
         private ImageView im_item;
         private Button btn_add;
         private ConstraintLayout parentLayout; //this is the row layout
+        private Spinner specialtySpinner;
+        private EditText quantity;
+        private Context context;
+        View[] pizzaProperties;
 
-        public ItemsHolder( View itemView) {
+        public ItemsHolder( View itemView, Context context) {
             super(itemView);
+            this.context=context;
             pizza_name = itemView.findViewById(R.id.pizza_type);
             pizza_price = itemView.findViewById(R.id.pizza_price);
             im_item = itemView.findViewById(R.id.im_item);
             btn_add = itemView.findViewById(R.id.btn_add);
             parentLayout = itemView.findViewById(R.id.rowLayout);
             toppingsDisplay = itemView.findViewById(R.id.toppingsDisplay);
+            sauceBox = itemView.findViewById(R.id.sauceBox);
+            cheeseBox = itemView.findViewById(R.id.cheeseBox);
+            quantity = itemView.findViewById(R.id.quantityInput);
+
+            populateSpinner(itemView);
             setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
 
         }
 
+        private void populateSpinner(View itemView){
+            specialtySpinner = itemView.findViewById(R.id.specialtySizeSpinner);
+            String[] sizes = new String[]{"Small", "Medium", "Large"};
+            ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, sizes);
+            sizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            specialtySpinner.setAdapter(sizeAdapter);
+
+        }
         /**
          * Set the onClickListener for the button on each row.
          * Clicking on the button will create an AlertDialog with the options of YES/NO.
@@ -108,13 +132,20 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
                 @Override
                 public void onClick(View view) {
                     AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
-                    alert.setTitle("See Toppings");
+                    if(!checkQuantity()){
+                        return;
+                    }
+                    alert.setTitle("Do you want to place order?");
                     alert.setMessage(pizza_name.getText().toString());
                     //handle the "YES" click
                     alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
+
+                            pizzaProperties = new View[] {pizza_name, pizza_price,sauceBox,cheeseBox, quantity, specialtySpinner};
+                            SpecialtyActivity.addPizzaToOrder(pizzaProperties);
                             Toast.makeText(itemView.getContext(),
                                     pizza_name.getText().toString() + " added.", Toast.LENGTH_LONG).show();
+                            resetInputs();
                         }
                         //handle the "NO" click
                     }).setNegativeButton("no", new DialogInterface.OnClickListener() {
@@ -127,6 +158,26 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
                     dialog.show();
                 }
             });
+        }
+
+        private void resetInputs(){
+            sauceBox.setSelected(false);
+            cheeseBox.setSelected(false);
+            quantity.setText("");
+        }
+        private boolean checkQuantity(){
+            Toast quantityNotify = new Toast(context);
+            if(quantity.getText().toString().isEmpty()){
+                quantityNotify.setText("Please enter a quantity");
+                quantityNotify.show();
+                return false;
+            }
+            if(Integer.parseInt(quantity.getText().toString()) <= 0){
+                quantityNotify.setText("Quantity must be greater than 0");
+                quantityNotify.show();
+                return false;
+            }
+            return true;
         }
     }
 }
