@@ -65,6 +65,7 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
         holder.pizza_name.setText(items.get(position).getItemName());
         holder.pizza_price.setText(items.get(position).getUnitPrice());
         holder.im_item.setImageResource(items.get(position).getImage());
+        holder.toppingsDisplay.setText(items.get(position).toppingsToString());
     }
 
     /**
@@ -80,7 +81,7 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
      * Get the views from the row layout file, similar to the onCreate() method.
      */
     public static class ItemsHolder extends RecyclerView.ViewHolder {
-        private TextView pizza_name, pizza_price;
+        private TextView pizza_name, pizza_price, toppingsDisplay;
         private ImageView im_item;
         private Button btn_add;
         private ConstraintLayout parentLayout; //this is the row layout
@@ -92,6 +93,7 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
             im_item = itemView.findViewById(R.id.im_item);
             btn_add = itemView.findViewById(R.id.btn_add);
             parentLayout = itemView.findViewById(R.id.rowLayout);
+            toppingsDisplay = itemView.findViewById(R.id.toppingsDisplay);
             setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
 
         }
@@ -106,7 +108,7 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
                 @Override
                 public void onClick(View view) {
                     AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
-                    alert.setTitle("Add to order");
+                    alert.setTitle("See Toppings");
                     alert.setMessage(pizza_name.getText().toString());
                     //handle the "YES" click
                     alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {

@@ -1,9 +1,14 @@
 package com.example.project5;
 
+import com.example.project5.enums.Toppings;
+
+import java.util.ArrayList;
+
 public class Item {
     private String itemName;
     private int image;
     private String unitPrice; //for demo purpose, the unitPrice is of String type
+    private ArrayList<Toppings> toppings;
 
     /**
      * Parameterized constructor.
@@ -11,10 +16,11 @@ public class Item {
      * @param image
      * @param unitPrice
      */
-    public Item(String itemName, int image, String unitPrice) {
+    public Item(String itemName, int image, String unitPrice, ArrayList<Toppings> toppings) {
         this.itemName = itemName;
         this.image = image;
         this.unitPrice = unitPrice;
+        this.toppings = toppings;
     }
 
     /**
@@ -40,6 +46,8 @@ public class Item {
     public String getUnitPrice() {
         return unitPrice;
     }
+
+    public String toppingsToString() {return toppings.toString();}
 }
 
 

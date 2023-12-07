@@ -7,28 +7,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/specialtyView"
-        android:layout_width="407dp"
-        android:layout_height="319dp"
+        android:layout_width="404dp"
+        android:layout_height="731dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
-        android:id="@+id/extraCheeseBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="52dp"
-        android:text="Extra Cheese"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/specialtyView" />
-
-    <CheckBox
-        android:id="@+id/extraSauceBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="Extra Sauce"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/extraCheeseBox" />
 </androidx.constraintlayout.widget.ConstraintLayout>

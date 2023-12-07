@@ -34,16 +34,17 @@ public class SpecialtyActivity extends AppCompatActivity {
         Pizza seafood = PizzaMaker.createPizza("Seafood");
         Pizza supreme = PizzaMaker.createPizza("Supreme");
         ArrayList<Item> pizzaDisplays = new ArrayList<>();
-        Item deluxeItem = new Item("Deluxe",
-                R.drawable.deluxe_pizza, Double.toString(deluxe.price()));
+        Item deluxeItem = new Item("Deluxe", R.drawable.deluxe_pizza,
+                Double.toString(deluxe.price()), deluxe.getToppings());
         Item meatzzaItem = new Item("Meatzza",
-                R.drawable.meatzza_pizza, Double.toString(meatzza.price()));
-        Item pepperoniItem = new Item("Pepperoni",
-                R.drawable.pepperoni_pizza, Double.toString(pepperoni.price()));
-        Item seafoodItem = new Item("Seafood",
-                R.drawable.seafood_pizza, Double.toString(seafood.price()));
-        Item supremeItem = new Item("Supreme",
-                R.drawable.supreme_pizza, Double.toString(supreme.price()));
+                R.drawable.meatzza_pizza,
+                Double.toString(meatzza.price()), meatzza.getToppings());
+        Item pepperoniItem = new Item("Pepperoni", R.drawable.pepperoni_pizza,
+                Double.toString(pepperoni.price()), pepperoni.getToppings());
+        Item seafoodItem = new Item("Seafood", R.drawable.seafood_pizza,
+                Double.toString(seafood.price()), seafood.getToppings());
+        Item supremeItem = new Item("Supreme", R.drawable.supreme_pizza,
+                Double.toString(supreme.price()), supreme.getToppings());
         pizzaDisplays.add(deluxeItem);
         pizzaDisplays.add(meatzzaItem);
         pizzaDisplays.add(pepperoniItem);
