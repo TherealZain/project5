@@ -24,7 +24,7 @@ package com.example.project5.enums;
  *
  * This enumeration allows for easy expansion to include more toppings as needed.
  *
- * @author Zain Zulfiqar, Nicholas SPYim
+ * @author Zain Zulfiqar, Nicholas Yim
  */
 public enum Toppings {
     SAUSAGE, PEPPERONI, GREENPEPPER,
