@@ -5,46 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/sizeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="Size"
-        app:layout_constraintEnd_toEndOf="@+id/pizzaSizeSpinner"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="@+id/pizzaSizeSpinner"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Spinner
         android:id="@+id/pizzaSizeSpinner"
         android:layout_width="109dp"
         android:layout_height="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sizeText" />
-
-    <ListView
-        android:id="@+id/addToppings"
-        android:layout_width="167dp"
-        android:layout_height="311dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/extraSauceCheckBox"
-        app:layout_constraintVertical_bias="0.03" />
-
-    <CheckBox
-        android:id="@+id/extraCheeseCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="132dp"
-        android:text="Extra Cheese"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/extraSauceCheckBox"
@@ -57,13 +25,26 @@
         app:layout_constraintStart_toStartOf="@+id/extraCheeseCheckBox"
         app:layout_constraintTop_toBottomOf="@+id/extraCheeseCheckBox" />
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="167dp"
-        android:layout_height="311dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="261dp" />
+    <CheckBox
+        android:id="@+id/extraCheeseCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="104dp"
+        android:text="Extra Cheese"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sizeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Pizza Size"
+        app:layout_constraintEnd_toEndOf="@+id/pizzaSizeSpinner"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="@+id/pizzaSizeSpinner"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
         android:id="@+id/sauceRadioGroup"
@@ -74,7 +55,7 @@
         app:layout_constraintHorizontal_bias="0.878"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.198">
+        app:layout_constraintVertical_bias="0.153">
 
         <RadioButton
             android:id="@+id/tomatoRadio"
@@ -89,33 +70,132 @@
             android:text="Alfredo" />
     </RadioGroup>
 
+    <ListView
+        android:id="@+id/availableToppingsListView"
+        android:choiceMode="singleChoice"
+        android:layout_width="163dp"
+        android:layout_height="306dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/selectedToppingsListView"
+        app:layout_constraintHorizontal_bias="0.224"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extraSauceCheckBox"
+        app:layout_constraintVertical_bias="0.182" />
+
+    <ListView
+        android:id="@+id/selectedToppingsListView"
+        android:choiceMode="singleChoice"
+        android:layout_width="154dp"
+        android:layout_height="304dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="163dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sauceRadioGroup"
+        app:layout_constraintVertical_bias="1.0" />
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/addToOrderButton"
         android:layout_width="133dp"
         android:layout_height="70dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="24dp"
         android:text="Add To Order"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintEnd_toEndOf="@+id/removeToppingButton"
+        app:layout_constraintStart_toStartOf="@+id/removeToppingButton" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="128dp"
-        android:layout_height="67dp"
-        android:layout_marginEnd="12dp"
+    <Button
+        android:id="@+id/addToppingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="9dp"
+        android:text="Add Topping"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/availableToppingsListView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/availableToppingsListView"
+        app:layout_constraintTop_toBottomOf="@+id/availableToppingsListView" />
+
+    <Button
+        android:id="@+id/removeToppingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="11dp"
+        android:text="Remove Topping"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="@+id/selectedToppingsListView"
+        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintStart_toEndOf="@+id/addToppingButton"
+        app:layout_constraintStart_toStartOf="@+id/selectedToppingsListView"
+        app:layout_constraintTop_toBottomOf="@+id/selectedToppingsListView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="9dp"
+        android:text="Additional Toppings"
+        app:layout_constraintBottom_toTopOf="@+id/availableToppingsListView"
+        app:layout_constraintEnd_toEndOf="@+id/availableToppingsListView"
+        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintHorizontal_bias="0.102"
+        app:layout_constraintStart_toStartOf="@+id/availableToppingsListView"
+        app:layout_constraintTop_toBottomOf="@+id/extraSauceCheckBox"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="9dp"
+        android:text="Selected Toppings"
+        app:layout_constraintBottom_toTopOf="@+id/selectedToppingsListView"
+        app:layout_constraintEnd_toEndOf="@+id/selectedToppingsListView"
+        app:layout_constraintStart_toStartOf="@+id/selectedToppingsListView"
+        app:layout_constraintTop_toBottomOf="@+id/sauceRadioGroup" />
+
+    <TextView
+        android:id="@+id/priceTextView"
+        android:layout_width="86dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:text="Total"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintHorizontal_bias="0.711"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/addToppingButton"
+        app:layout_constraintVertical_bias="0.234" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Total" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="18dp"
+        android:text="Price: $"
+        app:layout_constraintBottom_toBottomOf="@+id/priceTextView"
+        app:layout_constraintEnd_toStartOf="@+id/priceTextView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addToppingButton" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
