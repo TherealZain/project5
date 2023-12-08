@@ -1,87 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/myCartLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="My Cart"
         android:textSize="35sp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/orderNumberLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Order Number"
-        app:layout_constraintTop_toBottomOf="@+id/myCartLabel"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Order Number:"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/myCartLabel" />
 
-    <EditText
-        android:id="@+id/orderNumberField"
+    <TextView
+        android:id="@+id/orderNumberTextView"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:layout_marginStart="8dp"
         android:editable="false"
-        app:layout_constraintTop_toTopOf="@+id/orderNumberLabel"
         app:layout_constraintBottom_toBottomOf="@+id/orderNumberLabel"
         app:layout_constraintStart_toEndOf="@+id/orderNumberLabel"
-        android:layout_marginStart="8dp"/>
+        app:layout_constraintTop_toTopOf="@+id/orderNumberLabel" />
 
     <ListView
         android:id="@+id/pizzaListView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/orderNumberField"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="414dp"
+        android:layout_height="282dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/subTotalLabel"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderNumberTextView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/subTotalLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="292dp"
         android:text="Sub-Total"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="50dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/subTotalField"
+    <TextView
+        android:id="@+id/subTotalTextView"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
+        android:layout_marginStart="8dp"
         android:editable="false"
-        app:layout_constraintTop_toTopOf="@+id/subTotalLabel"
+        android:text="$0.00"
         app:layout_constraintBottom_toBottomOf="@+id/subTotalLabel"
         app:layout_constraintStart_toEndOf="@+id/subTotalLabel"
-        android:layout_marginStart="8dp"/>
+        app:layout_constraintTop_toTopOf="@+id/subTotalLabel"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/placeOrderButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="132dp"
         android:text="Place Order"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pizzaListView"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/removePizzaButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="132dp"
         android:text="Remove Pizza"
-        app:layout_constraintStart_toStartOf="@+id/placeOrderButton"
-        app:layout_constraintTop_toBottomOf="@+id/placeOrderButton"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/placeOrderButton" />
+
+    <TextView
+        android:id="@+id/salesTaxLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="292dp"
+        android:text="Sales Tax"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/subTotalTextView" />
+
+    <TextView
+        android:id="@+id/salesTaxTextView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="$0.00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/salesTaxLabel"
+        app:layout_constraintTop_toTopOf="@+id/salesTaxLabel" />
+
+    <TextView
+        android:id="@+id/orderTotalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="32dp"
+        android:text="Order Total"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/salesTaxTextView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/orderTotalTextView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="$0.00"
+        app:layout_constraintStart_toEndOf="@+id/orderTotalLabel"
+        app:layout_constraintTop_toTopOf="@+id/orderTotalLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

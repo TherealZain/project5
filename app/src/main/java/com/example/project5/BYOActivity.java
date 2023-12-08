@@ -50,7 +50,7 @@ public class BYOActivity extends AppCompatActivity {
         setUpToppings();
         priceTextView = findViewById(R.id.priceTextView);
         String price = String.format("%.2f", buildYourOwn.price());
-        priceTextView.setText(price);
+        priceTextView.setText("$" + price);
 
         Button addToOrderButton = findViewById(R.id.addToOrderButton); // Assuming this is your button ID
         addToOrderButton.setOnClickListener(v -> addPizzaToOrder());
@@ -173,16 +173,15 @@ public class BYOActivity extends AppCompatActivity {
 
     private void handlePriceChange() {
         double price = buildYourOwn.price();
-        priceTextView.setText(String.format("%.2f", price));
+        String priceString = String.format("%.2f", price);
+        priceTextView.setText("$" + priceString);
     }
 
     public void addPizzaToOrder() {
-        // Assuming you have a singleton Order instance like in SpecialtyActivity
         Order currentOrder = Order.getInstance();
         currentOrder.addToOrder(buildYourOwn);
         Toast.makeText(this, "Pizza added to order", Toast.LENGTH_SHORT).show();
 
-        // Optionally reset the BYO interface for a new pizza
         resetUI();
     }
 
