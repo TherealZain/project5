@@ -5,9 +5,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,7 +44,6 @@ public class CurrentOrderActivity extends AppCompatActivity {
         pizzaListView = findViewById(R.id.pizzaListView);
         placeOrderButton = findViewById(R.id.placeOrderButton);
         removePizzaButton = findViewById(R.id.removePizzaButton);
-
         pizzaAdapter = new HighlightArrayAdapter(this, android.R.layout.simple_list_item_1, pizzaList);
         pizzaListView.setAdapter(pizzaAdapter);
 
@@ -54,28 +53,51 @@ public class CurrentOrderActivity extends AppCompatActivity {
                 ((HighlightArrayAdapter)pizzaAdapter).setSelectedPosition(position);
             }
         });
+        placeOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handlePlaceOrder();
+            }
+        });
+        removePizzaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleRemovePizza();
+            }
+        });
     }
 
+    public void handlePlaceOrder() {
+        if (pizzaList.isEmpty()) {
+            Toast.makeText(this, "No pizzas in the order. Please add pizzas " +
+                    "before placing the order.", Toast.LENGTH_LONG).show();
+            return;
+        }
 
-    public void handlePlaceOrder(View view) {
         storeOrders.addOrder(order);
+        Toast.makeText(this, "Order successfully placed.",
+                Toast.LENGTH_SHORT).show();
         Order.createNewOrder();
         order = Order.getInstance();
         SpecialtyActivity.setOrder(order);
         updateOrderDisplay();
-
     }
 
-    public void handleRemovePizza(View view) {
-        int selectedPosition = ((HighlightArrayAdapter) pizzaAdapter).getSelectedPosition();
+    public void handleRemovePizza() {
+        int selectedPosition = ((HighlightArrayAdapter)
+                pizzaAdapter).getSelectedPosition();
         if (selectedPosition >= 0 && selectedPosition < pizzaList.size()) {
             pizzaList.remove(selectedPosition);
             order.removePizza(selectedPosition);
-            ((HighlightArrayAdapter) pizzaAdapter).setSelectedPosition(-1); // Reset selection
+            ((HighlightArrayAdapter) pizzaAdapter).setSelectedPosition(-1);
             pizzaAdapter.notifyDataSetChanged();
             calculateTotals(order.getPizzas());
+            Toast.makeText(this, "Pizza removed from order.",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Please select a pizza to remove.",
+                    Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void updateOrderDisplay() {
@@ -85,7 +107,6 @@ public class CurrentOrderActivity extends AppCompatActivity {
 
         if (order != null) {
             orderNumberTextView.setText(String.valueOf(order.getOrderNum()));
-
             ArrayList<Pizza> pizzaItems =  order.getPizzas();
             for(Pizza pizza : pizzaItems){
                 if(pizza != null) {
@@ -103,7 +124,6 @@ public class CurrentOrderActivity extends AppCompatActivity {
                 subTotal += pizza.price();
             }
         }
-
         double salesTax = Math.round((subTotal*SALES_TAX_RATE)*100.0)/100.0;
         double totalCost = Math.round((subTotal + salesTax)*100.0)/100.0;
         String orderNumString = Integer.toString(order.getOrderNum());
