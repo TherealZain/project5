@@ -1,6 +1,8 @@
 package com.example.project5;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +24,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
     private ArrayList<String> pizzaList;
     private static final double SALES_TAX_RATE = 0.06625;
     private static Order order = Order.getInstance();
+    private static StoreOrders storeOrders = StoreOrders.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +45,37 @@ public class CurrentOrderActivity extends AppCompatActivity {
         placeOrderButton = findViewById(R.id.placeOrderButton);
         removePizzaButton = findViewById(R.id.removePizzaButton);
 
-        pizzaAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, pizzaList);
+        pizzaAdapter = new HighlightArrayAdapter(this, android.R.layout.simple_list_item_1, pizzaList);
         pizzaListView.setAdapter(pizzaAdapter);
 
-        placeOrderButton.setOnClickListener(v -> handlePlaceOrder());
-        removePizzaButton.setOnClickListener(v -> handleRemovePizza());
+        pizzaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ((HighlightArrayAdapter)pizzaAdapter).setSelectedPosition(position);
+            }
+        });
     }
 
-    private void handlePlaceOrder() {
+
+    public void handlePlaceOrder(View view) {
+        storeOrders.addOrder(order);
+        Order.createNewOrder();
+        order = Order.getInstance();
+        SpecialtyActivity.setOrder(order);
+        updateOrderDisplay();
+
     }
 
-    private void handleRemovePizza() {
+    public void handleRemovePizza(View view) {
+        int selectedPosition = ((HighlightArrayAdapter) pizzaAdapter).getSelectedPosition();
+        if (selectedPosition >= 0 && selectedPosition < pizzaList.size()) {
+            pizzaList.remove(selectedPosition);
+            order.removePizza(selectedPosition);
+            ((HighlightArrayAdapter) pizzaAdapter).setSelectedPosition(-1); // Reset selection
+            pizzaAdapter.notifyDataSetChanged();
+            calculateTotals(order.getPizzas());
+        }
+
     }
 
     private void updateOrderDisplay() {

@@ -53,6 +53,11 @@ public class Order {
         pizzaOrders.add(pizza);
     }
 
+    public static void createNewOrder(){
+        currOrderInstance = new Order();
+
+    }
+
     /**
      * Gets the order number.
      * This method returns the unique number assigned to the order.

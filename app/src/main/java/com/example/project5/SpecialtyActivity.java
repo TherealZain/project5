@@ -60,6 +60,8 @@ public class SpecialtyActivity extends AppCompatActivity {
         }
     }
 
+    public static void setOrder(Order newOrder){currOrder = newOrder;}
+
     private ArrayList<Item> fillItemArrays(){
         Pizza deluxe = PizzaMaker.createPizza("Deluxe");
         Pizza meatzza = PizzaMaker.createPizza("Meatzza");
