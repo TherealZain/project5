@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,7 +42,6 @@ public class BYOActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_byo);
         setUpViews();
-
     }
 
     private void setUpViews() {
@@ -80,6 +80,11 @@ public class BYOActivity extends AppCompatActivity {
 
     private void setUpExtras() {
         sauceRadioGroup = findViewById(R.id.sauceRadioGroup);
+        RadioButton tomatoRadio = findViewById(R.id.tomatoRadio);
+
+        sauceRadioGroup.check(tomatoRadio.getId());
+        buildYourOwn.setSauce(Sauce.TOMATO);
+
         sauceRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -88,7 +93,7 @@ public class BYOActivity extends AppCompatActivity {
                 } else if (checkedId == R.id.alfredoRadio) {
                     buildYourOwn.setSauce(Sauce.ALFREDO);
                 }
-
+                handlePriceChange();
             }
         });
 
@@ -112,17 +117,24 @@ public class BYOActivity extends AppCompatActivity {
         ListView availableToppingsListView = findViewById(R.id.availableToppingsListView);
         ListView selectedToppingsListView = findViewById(R.id.selectedToppingsListView);
 
-        availableToppingsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, availableToppings);
-        selectedToppingsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, selectedToppings);
+        availableToppingsAdapter = new HighlightArrayAdapter(this, android.R.layout.simple_list_item_1, availableToppings);
+        selectedToppingsAdapter = new HighlightArrayAdapter(this, android.R.layout.simple_list_item_1, selectedToppings);
 
-        availableToppingsListView.setAdapter(availableToppingsAdapter);
-        selectedToppingsListView.setAdapter(selectedToppingsAdapter);
+        setupListViewWithHighlightAdapter(availableToppingsListView, availableToppingsAdapter);
+        setupListViewWithHighlightAdapter(selectedToppingsListView, selectedToppingsAdapter);
 
         Button addToppingButton = findViewById(R.id.addToppingButton);
         Button removeToppingButton = findViewById(R.id.removeToppingButton);
 
         addToppingButton.setOnClickListener(v -> handleAddTopping(availableToppingsListView));
         removeToppingButton.setOnClickListener(v -> handleRemoveTopping(selectedToppingsListView));
+    }
+
+    private void setupListViewWithHighlightAdapter(ListView listView, ArrayAdapter<String> adapter) {
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener((parent, view, position, id) ->
+                ((HighlightArrayAdapter) adapter).setSelectedPosition(position)
+        );
     }
 
     private void initializeToppingsLists() {
@@ -149,6 +161,7 @@ public class BYOActivity extends AppCompatActivity {
             listView.setItemChecked(position, false);
             handlePriceChange();
         }
+        ((HighlightArrayAdapter) availableToppingsAdapter).setSelectedPosition(-1);
     }
 
     private void handleRemoveTopping(ListView listView) {
@@ -164,6 +177,7 @@ public class BYOActivity extends AppCompatActivity {
             listView.setItemChecked(position, false);
             handlePriceChange();
         }
+        ((HighlightArrayAdapter) selectedToppingsAdapter).setSelectedPosition(-1);
     }
 
     private void updateAdapters() {
@@ -191,8 +205,6 @@ public class BYOActivity extends AppCompatActivity {
 
         extraCheeseCheckBox.setChecked(false);
         extraSauceCheckBox.setChecked(false);
-
-        sauceRadioGroup.clearCheck();
 
         selectedToppings.clear();
         availableToppings.clear();
