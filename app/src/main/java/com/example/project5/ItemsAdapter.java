@@ -3,9 +3,11 @@ package com.example.project5;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,6 +21,9 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.project5.pizzas.Pizza;
+import com.example.project5.enums.Size;
 
 import java.util.ArrayList;
 
@@ -66,11 +71,12 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
      */
     @Override
     public void onBindViewHolder( ItemsHolder holder, int position) {
-        //assign values for each row
-        holder.pizza_name.setText(items.get(position).getItemName());
+        String pizzaName = items.get(position).getItemName();
+        holder.pizza_name.setText(pizzaName);
         holder.pizza_price.setText(items.get(position).getUnitPrice());
         holder.im_item.setImageResource(items.get(position).getImage());
         holder.toppingsDisplay.setText(items.get(position).toppingsToString());
+        holder.createDisplayPizza(pizzaName);
     }
 
     /**
@@ -87,6 +93,10 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
      */
     public static class ItemsHolder extends RecyclerView.ViewHolder {
         private TextView pizza_name, pizza_price, toppingsDisplay;
+        private static final int SMALL_INDEX = 0;
+        private static final int MEDIUM_INDEX = 1;
+        private static final int LARGE_INDEX = 2;
+        private Pizza displayPizza;
         private CheckBox sauceBox, cheeseBox;
         private ImageView im_item;
         private Button btn_add;
@@ -108,10 +118,32 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
             sauceBox = itemView.findViewById(R.id.sauceBox);
             cheeseBox = itemView.findViewById(R.id.cheeseBox);
             quantity = itemView.findViewById(R.id.quantityInput);
-
             populateSpinner(itemView);
-            setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
+            setAddButtonOnClick(itemView);
+            setExtraButtonClick(itemView);
+        }
 
+        public void setExtraButtonClick(View view){
+            sauceBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view){
+                    displayPizza.setExtraSauce(sauceBox.isChecked());
+                        pizza_price.setText(Double.toString(displayPizza.price()));
+                }
+            });
+            cheeseBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view){
+                    displayPizza.setExtraCheese(cheeseBox.isChecked());
+                    pizza_price.setText(String.format("%.2f", displayPizza.price()));
+                }
+            });
+        }
+
+
+
+        private void createDisplayPizza(String pizzaName){
+            displayPizza = PizzaMaker.createPizza(pizzaName);
         }
 
         private void populateSpinner(View itemView){
@@ -120,7 +152,25 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
             ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, sizes);
             sizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             specialtySpinner.setAdapter(sizeAdapter);
-
+            specialtySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    switch (position) {
+                        case SMALL_INDEX:
+                            displayPizza.setSize(Size.SMALL);
+                            break;
+                        case MEDIUM_INDEX:
+                            displayPizza.setSize(Size.MEDIUM);
+                            break;
+                        case LARGE_INDEX:
+                            displayPizza.setSize(Size.LARGE);
+                            break;
+                    }
+                    pizza_price.setText(String.format("%.2f", displayPizza.price()));
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {}
+            });
         }
         /**
          * Set the onClickListener for the button on each row.
@@ -140,7 +190,6 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
                     //handle the "YES" click
                     alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-
                             pizzaProperties = new View[] {pizza_name, pizza_price,sauceBox,cheeseBox, quantity, specialtySpinner};
                             SpecialtyActivity.addPizzaToOrder(pizzaProperties);
                             Toast.makeText(itemView.getContext(),

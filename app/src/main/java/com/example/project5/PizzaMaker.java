@@ -1,12 +1,17 @@
 package com.example.project5;
 
+import com.example.project5.pizzas.BBQChicken;
 import com.example.project5.pizzas.BuildYourOwn;
 import com.example.project5.pizzas.Deluxe;
+import com.example.project5.pizzas.Hawaiian;
+import com.example.project5.pizzas.Margherita;
+import com.example.project5.pizzas.Mexican;
 import com.example.project5.pizzas.Supreme;
 import com.example.project5.pizzas.Meatzza;
 import com.example.project5.pizzas.Seafood;
 import com.example.project5.pizzas.Pepperoni;
 import com.example.project5.pizzas.Pizza;
+import com.example.project5.pizzas.Veggie;
 
 /**
  * Factory class for creating various types of Pizza objects.
@@ -41,6 +46,16 @@ public class PizzaMaker {
             return new Seafood();
         } else if (pizzaType.equals("Pepperoni")) {
             return new Pepperoni();
+        } else if (pizzaType.equals("BBQ Chicken")){
+            return new BBQChicken();
+        } else if (pizzaType.equals("Hawaiian")) {
+            return new Hawaiian();
+        } else if (pizzaType.equals("Margherita")) {
+            return new Margherita();
+        } else if (pizzaType.equals("Mexican")) {
+            return new Mexican();
+        } else if (pizzaType.equals("Veggie")) {
+            return new Veggie();
         } else {
             throw new IllegalArgumentException("Unknown pizza type: " + pizzaType);
         }

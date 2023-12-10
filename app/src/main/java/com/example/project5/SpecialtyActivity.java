@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class SpecialtyActivity extends AppCompatActivity {
 
     private static Order currOrder = Order.getInstance();
+    private ArrayList<Item> pizzaDisplays;
     private static final int PIZZA_NAME_INDEX = 0;
     private static final int PIZZA_PRICE_INDEX = 1;
     private static final int PIZZA_SAUCE_INDEX = 2;
@@ -29,11 +30,13 @@ public class SpecialtyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specialty);
+        pizzaDisplays = new ArrayList<>();
         setRecycler();
     }
 
     public void setRecycler(){
-        ArrayList<Item> pizzaDisplays = fillItemArrays();
+        fillItemArrays();
+        addNewSpecialtyPizzas();
         ItemsAdapter adapter = new ItemsAdapter(this, pizzaDisplays);
         RecyclerView recyclerView = findViewById(R.id.specialtyView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -49,8 +52,8 @@ public class SpecialtyActivity extends AppCompatActivity {
         CheckBox extraCheeseBox = (CheckBox) pizzaProps[PIZZA_CHEESE_INDEX];
         String pizzaType = pizzaTypeView.getText().toString();
         String size = sizeSpinner.getSelectedItem().toString();
-        boolean extraSauce = extraSauceBox.isSelected();
-        boolean extraCheese = extraCheeseBox.isSelected();
+        boolean extraSauce = extraSauceBox.isChecked();
+        boolean extraCheese = extraCheeseBox.isChecked();
         for(int i =0; i < numOfPizzas; i++){
             Pizza pizza = PizzaMaker.createPizza(pizzaType);
             pizza.setSize(Size.valueOf(size.toUpperCase()));
@@ -68,7 +71,6 @@ public class SpecialtyActivity extends AppCompatActivity {
         Pizza pepperoni = PizzaMaker.createPizza("Pepperoni");
         Pizza seafood = PizzaMaker.createPizza("Seafood");
         Pizza supreme = PizzaMaker.createPizza("Supreme");
-        ArrayList<Item> pizzaDisplays = new ArrayList<>();
         Item deluxeItem = new Item("Deluxe", R.drawable.deluxe_pizza,
                 Double.toString(deluxe.price()), deluxe.getToppings());
         Item meatzzaItem = new Item("Meatzza",
@@ -86,5 +88,28 @@ public class SpecialtyActivity extends AppCompatActivity {
         pizzaDisplays.add(seafoodItem);
         pizzaDisplays.add(supremeItem);
         return pizzaDisplays;
+    }
+
+    private void addNewSpecialtyPizzas(){
+        Pizza bbqChicken = PizzaMaker.createPizza("BBQ Chicken");
+        Pizza hawaiian = PizzaMaker.createPizza("Hawaiian");
+        Pizza margherita = PizzaMaker.createPizza("Margherita");
+        Pizza mexican = PizzaMaker.createPizza("Mexican");
+        Pizza veggie = PizzaMaker.createPizza("Veggie");
+        Item bbqChickenItem = new Item("BBQ Chicken", R.drawable.bbq_chicken_pizza,
+                Double.toString(bbqChicken.price()), bbqChicken.getToppings());
+        Item hawaiianItem = new Item("Hawaiian", R.drawable.hawaiian_pizza,
+                Double.toString(hawaiian.price()), hawaiian.getToppings());
+        Item margheritaItem = new Item("Margherita", R.drawable.margherita_pizza,
+                Double.toString(margherita.price()), margherita.getToppings());
+        Item mexicanItem = new Item("Mexican", R.drawable.mexican_pizza,
+                Double.toString(mexican.price()), mexican.getToppings());
+        Item veggieItem = new Item("Veggie", R.drawable.veggie_pizza,
+                Double.toString(veggie.price()), veggie.getToppings());
+        pizzaDisplays.add(bbqChickenItem);
+        pizzaDisplays.add(hawaiianItem);
+        pizzaDisplays.add(margheritaItem);
+        pizzaDisplays.add(mexicanItem);
+        pizzaDisplays.add(veggieItem);
     }
 }

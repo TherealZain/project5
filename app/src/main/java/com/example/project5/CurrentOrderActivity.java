@@ -46,7 +46,6 @@ public class CurrentOrderActivity extends AppCompatActivity {
         removePizzaButton = findViewById(R.id.removePizzaButton);
         pizzaAdapter = new HighlightArrayAdapter(this, android.R.layout.simple_list_item_1, pizzaList);
         pizzaListView.setAdapter(pizzaAdapter);
-
         pizzaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -73,16 +72,13 @@ public class CurrentOrderActivity extends AppCompatActivity {
                     "before placing the order.", Toast.LENGTH_LONG).show();
             return;
         }
-
         int orderNumber = order.getOrderNum();
-
         storeOrders.addOrder(order);
         Order.createNewOrder();
         order = Order.getInstance();
-
+        SpecialtyActivity.setOrder(order);
         Toast.makeText(this, "Order successfully placed. Your order number is " + orderNumber + ".", Toast.LENGTH_LONG).show();
-
-        updateOrderDisplay(); // Update the display to show the new order (which should be empty)
+        updateOrderDisplay();
     }
 
     public void handleRemovePizza() {
@@ -106,7 +102,6 @@ public class CurrentOrderActivity extends AppCompatActivity {
         pizzaAdapter.clear();
         pizzaAdapter.addAll(pizzaList);
         pizzaAdapter.notifyDataSetChanged();
-
         if (order != null) {
             orderNumberTextView.setText(String.valueOf(order.getOrderNum()));
             ArrayList<Pizza> pizzaItems =  order.getPizzas();

@@ -14,5 +14,5 @@ package com.example.project5.enums;
  */
 public enum Sauce {
     TOMATO,
-    ALFREDO;
+    ALFREDO, BBQ;
 }
