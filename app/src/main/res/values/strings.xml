@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">project5</string>
+        <string name="pizza_size">Pizza Size</string>
+        <string name="extra_cheese">Extra Cheese</string>
+        <string name="extra_sauce">Extra Sauce</string>
+        <string name="tomato">Tomato</string>
+        <string name="alfredo">Alfredo</string>
+        <string name="add_to_order">Add To Order</string>
+        <string name="add_topping">Add Topping</string>
+        <string name="remove_topping">Remove Topping</string>
+        <string name="additional_toppings">Additional Toppings</string>
+        <string name="selected_toppings">Selected Toppings</string>
+        <string name="price">Price:</string>
+        <string name="dollar">$</string>
+        <string name="empty"></string>
+        <string name="quantity">Quantity</string>
+        <string name="my_cart">My Cart</string>
+        <string name="order_number">Order Number:</string>
+        <string name="sub_total">Sub-Total</string>
+        <string name="place_order">Place Order</string>
+        <string name="remove_pizza">Remove Pizza</string>
+        <string name="sales_tax">Sales Tax</string>
+        <string name="zero_placeholder">$0.00</string>
+        <string name="order_total">Order Total</string>
+        <string name="ru_pizza">RU Pizza</string>
+        <string name="specialty_pizza">Specialty Pizza</string>
+        <string name="store_orders">Store Orders</string>
+        <string name="build_your_own">Build Your Own</string>
+        <string name="current_orders">Current Orders</string>
+        <string name="cancel_order">Cancel Order</string>
+
 </resources>

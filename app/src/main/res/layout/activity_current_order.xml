@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="My Cart"
+        android:text="@string/my_cart"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Order Number:"
+        android:text="@string/order_number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myCartLabel" />
 
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="292dp"
-        android:text="Sub-Total"
+        android:text="@string/sub_total"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -78,7 +78,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginBottom="132dp"
         android:onClick="handlePlaceOrder"
-        android:text="Place Order"
+        android:text="@string/place_order"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -89,7 +89,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginBottom="132dp"
         android:onClick="handleRemovePizza"
-        android:text="Remove Pizza"
+        android:text="@string/remove_pizza"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/placeOrderButton" />
 
@@ -99,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="292dp"
-        android:text="Sales Tax"
+        android:text="@string/sales_tax"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/subTotalTextView" />
 
@@ -108,7 +108,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="$0.00"
+        android:text="@string/zero_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/salesTaxLabel"
@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="128dp"
         android:layout_marginTop="32dp"
-        android:text="Order Total"
+        android:text="@string/order_total"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/salesTaxTextView"
@@ -131,7 +131,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="$0.00"
+        android:text="@string/zero_placeholder"
         app:layout_constraintStart_toEndOf="@+id/orderTotalLabel"
         app:layout_constraintTop_toTopOf="@+id/orderTotalLabel" />
 

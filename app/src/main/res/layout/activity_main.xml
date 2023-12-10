@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:editable="false"
-        android:text="RU Pizza"
+        android:text="@string/ru_pizza"
         android:textSize="45sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
                 android:layout_width="139dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Specialty Pizza"
+                android:text="@string/specialty_pizza"
                 android:textAlignment="center"
                 android:textSize="25sp" />
 
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Store Orders"
+                android:text="@string/store_orders"
                 android:textAlignment="center"
                 android:textSize="25sp" />
         </LinearLayout>
@@ -114,7 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Build Your Own"
+            android:text="@string/build_your_own"
             android:textAlignment="center"
             android:textSize="25sp" />
 
@@ -123,7 +123,7 @@
             android:layout_width="191dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Current Orders"
+            android:text="@string/current_orders"
             android:textAlignment="center"
             android:textSize="25sp" />
     </LinearLayout>

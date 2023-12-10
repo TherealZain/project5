@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Pizza Size"
+        android:text="@string/pizza_size"
         app:layout_constraintEnd_toEndOf="@+id/pizzaSizeSpinner"
         app:layout_constraintHorizontal_bias="0.347"
         app:layout_constraintStart_toStartOf="@+id/pizzaSizeSpinner"
@@ -30,7 +30,8 @@
         android:id="@+id/extraCheeseCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Extra Cheese"
+        android:onClick="setExtras"
+        android:text="@string/extra_cheese"
         app:layout_constraintBottom_toTopOf="@+id/extraSauceCheckBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -43,7 +44,8 @@
         android:layout_width="117dp"
         android:layout_height="44dp"
         android:layout_marginTop="68dp"
-        android:text="Extra Sauce"
+        android:onClick="setExtras"
+        android:text="@string/extra_sauce"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.537"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,13 +64,13 @@
             android:id="@+id/tomatoRadio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tomato" />
+            android:text="@string/tomato" />
 
         <RadioButton
             android:id="@+id/alfredoRadio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Alfredo" />
+            android:text="@string/alfredo" />
     </RadioGroup>
 
     <ListView
@@ -104,7 +106,7 @@
         android:layout_height="70dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="32dp"
-        android:text="Add To Order"
+        android:text="@string/add_to_order"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/removeToppingButton"
         app:layout_constraintHorizontal_bias="0.0"
@@ -117,7 +119,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="112dp"
-        android:text="Add Topping"
+        android:text="@string/add_topping"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/removeToppingButton"
@@ -132,7 +134,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="112dp"
-        android:text="Remove Topping"
+        android:text="@string/remove_topping"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -145,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="38dp"
         android:layout_marginBottom="19dp"
-        android:text="Additional Toppings"
+        android:text="@string/additional_toppings"
         app:layout_constraintBottom_toTopOf="@+id/availableToppingsListView"
         app:layout_constraintEnd_toEndOf="@+id/availableToppingsListView"
         app:layout_constraintEnd_toStartOf="@+id/textView8"
@@ -161,7 +163,7 @@
         android:layout_marginTop="204dp"
         android:layout_marginEnd="56dp"
         android:layout_marginBottom="28dp"
-        android:text="Selected Toppings"
+        android:text="@string/selected_toppings"
         app:layout_constraintBottom_toTopOf="@+id/selectedToppingsListView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -173,7 +175,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
         android:layout_marginBottom="68dp"
-        android:text="Price:"
+        android:text="@string/price"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addToppingButton"
@@ -195,7 +197,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="68dp"
-        android:text="$"
+        android:text="@string/dollar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView10" />
 

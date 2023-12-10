@@ -35,6 +35,7 @@ public class BYOActivity extends AppCompatActivity {
     private ArrayList<String> availableToppings = new ArrayList<>();
     private ArrayList<String> selectedToppings = new ArrayList<>();
     private static final int MAX_TOPPINGS = 7;
+    private static final int MIN_TOPPINGS = 3;
     private static final int SMALL_SELECTION = 0;
 
     @Override
@@ -81,10 +82,8 @@ public class BYOActivity extends AppCompatActivity {
     private void setUpExtras() {
         sauceRadioGroup = findViewById(R.id.sauceRadioGroup);
         RadioButton tomatoRadio = findViewById(R.id.tomatoRadio);
-
         sauceRadioGroup.check(tomatoRadio.getId());
         buildYourOwn.setSauce(Sauce.TOMATO);
-
         sauceRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -99,33 +98,24 @@ public class BYOActivity extends AppCompatActivity {
 
         extraCheeseCheckBox = findViewById(R.id.extraCheeseCheckBox);
         extraSauceCheckBox = findViewById(R.id.extraSauceCheckBox);
+    }
 
-        extraCheeseCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            buildYourOwn.setExtraCheese(isChecked);
-            handlePriceChange();
-        });
-
-        extraSauceCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            buildYourOwn.setExtraSauce(isChecked);
-            handlePriceChange();
-        });
+    public void setExtras(View view){
+        buildYourOwn.setExtraCheese(extraCheeseCheckBox.isChecked());
+        buildYourOwn.setExtraSauce(extraSauceCheckBox.isChecked());
+        handlePriceChange();
     }
 
     private void setUpToppings() {
         initializeToppingsLists();
-
         ListView availableToppingsListView = findViewById(R.id.availableToppingsListView);
         ListView selectedToppingsListView = findViewById(R.id.selectedToppingsListView);
-
         availableToppingsAdapter = new HighlightArrayAdapter(this, android.R.layout.simple_list_item_1, availableToppings);
         selectedToppingsAdapter = new HighlightArrayAdapter(this, android.R.layout.simple_list_item_1, selectedToppings);
-
         setupListViewWithHighlightAdapter(availableToppingsListView, availableToppingsAdapter);
         setupListViewWithHighlightAdapter(selectedToppingsListView, selectedToppingsAdapter);
-
         Button addToppingButton = findViewById(R.id.addToppingButton);
         Button removeToppingButton = findViewById(R.id.removeToppingButton);
-
         addToppingButton.setOnClickListener(v -> handleAddTopping(availableToppingsListView));
         removeToppingButton.setOnClickListener(v -> handleRemoveTopping(selectedToppingsListView));
     }
@@ -193,11 +183,14 @@ public class BYOActivity extends AppCompatActivity {
 
 
     public void addPizzaToOrder() {
-
+        if(selectedToppings.size() < MIN_TOPPINGS){
+            Toast.makeText(this,
+                    "Must have minimum 3 toppings.", Toast.LENGTH_LONG).show();
+            return;
+        }
         Order currentOrder = Order.getInstance();
         currentOrder.addToOrder(buildYourOwn);
         Toast.makeText(this, "Pizza added to order", Toast.LENGTH_SHORT).show();
-
         resetUI();
     }
 
