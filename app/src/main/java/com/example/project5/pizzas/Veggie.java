@@ -1,5 +1,6 @@
 package com.example.project5.pizzas;
 
+import com.example.project5.BYOActivity;
 import com.example.project5.enums.Sauce;
 import com.example.project5.enums.Size;
 import com.example.project5.enums.Toppings;
@@ -58,7 +59,7 @@ public class Veggie extends Pizza {
             if (!toppingsString.isEmpty()) {
                 toppingsString += ", ";
             }
-            //toppingsString += BuildOwnController.capitalize(topping.name().toLowerCase().replace('_', ' '));
+            toppingsString += BYOActivity.capitalize(topping.name().toLowerCase());
         }
         String sizeString = ", " + size.toString().toLowerCase();
         String sauceString = ", " + sauce.toString().toLowerCase();
@@ -69,5 +70,4 @@ public class Veggie extends Pizza {
                 extraSauceString + priceString;
     }
 
-    // ... Implement addToppings, removeToppings, toString, etc.
 }

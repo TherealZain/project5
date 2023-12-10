@@ -72,16 +72,15 @@ public class SpecialtyActivity extends AppCompatActivity {
         Pizza seafood = PizzaMaker.createPizza("Seafood");
         Pizza supreme = PizzaMaker.createPizza("Supreme");
         Item deluxeItem = new Item("Deluxe", R.drawable.deluxe_pizza,
-                Double.toString(deluxe.price()), deluxe.getToppings());
-        Item meatzzaItem = new Item("Meatzza",
-                R.drawable.meatzza_pizza,
-                Double.toString(meatzza.price()), meatzza.getToppings());
+                Double.toString(deluxe.price()), deluxe.getToppings(), deluxe.getSauce());
+        Item meatzzaItem = new Item("Meatzza", R.drawable.meatzza_pizza,
+                Double.toString(meatzza.price()), meatzza.getToppings(), meatzza.getSauce());
         Item pepperoniItem = new Item("Pepperoni", R.drawable.pepperoni_pizza,
-                Double.toString(pepperoni.price()), pepperoni.getToppings());
+                Double.toString(pepperoni.price()), pepperoni.getToppings(), pepperoni.getSauce());
         Item seafoodItem = new Item("Seafood", R.drawable.seafood_pizza,
-                Double.toString(seafood.price()), seafood.getToppings());
+                Double.toString(seafood.price()), seafood.getToppings(), seafood.getSauce());
         Item supremeItem = new Item("Supreme", R.drawable.supreme_pizza,
-                Double.toString(supreme.price()), supreme.getToppings());
+                Double.toString(supreme.price()), supreme.getToppings(), supreme.getSauce());
         pizzaDisplays.add(deluxeItem);
         pizzaDisplays.add(meatzzaItem);
         pizzaDisplays.add(pepperoniItem);
@@ -97,15 +96,15 @@ public class SpecialtyActivity extends AppCompatActivity {
         Pizza mexican = PizzaMaker.createPizza("Mexican");
         Pizza veggie = PizzaMaker.createPizza("Veggie");
         Item bbqChickenItem = new Item("BBQ Chicken", R.drawable.bbq_chicken_pizza,
-                Double.toString(bbqChicken.price()), bbqChicken.getToppings());
+                Double.toString(bbqChicken.price()), bbqChicken.getToppings(), bbqChicken.getSauce());
         Item hawaiianItem = new Item("Hawaiian", R.drawable.hawaiian_pizza,
-                Double.toString(hawaiian.price()), hawaiian.getToppings());
+                Double.toString(hawaiian.price()), hawaiian.getToppings(), hawaiian.getSauce());
         Item margheritaItem = new Item("Margherita", R.drawable.margherita_pizza,
-                Double.toString(margherita.price()), margherita.getToppings());
+                Double.toString(margherita.price()), margherita.getToppings(), margherita.getSauce());
         Item mexicanItem = new Item("Mexican", R.drawable.mexican_pizza,
-                Double.toString(mexican.price()), mexican.getToppings());
+                Double.toString(mexican.price()), mexican.getToppings(), mexican.getSauce());
         Item veggieItem = new Item("Veggie", R.drawable.veggie_pizza,
-                Double.toString(veggie.price()), veggie.getToppings());
+                Double.toString(veggie.price()), veggie.getToppings(), veggie.getSauce());
         pizzaDisplays.add(bbqChickenItem);
         pizzaDisplays.add(hawaiianItem);
         pizzaDisplays.add(margheritaItem);
