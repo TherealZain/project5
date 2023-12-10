@@ -74,13 +74,15 @@ public class CurrentOrderActivity extends AppCompatActivity {
             return;
         }
 
+        int orderNumber = order.getOrderNum();
+
         storeOrders.addOrder(order);
-        Toast.makeText(this, "Order successfully placed.",
-                Toast.LENGTH_SHORT).show();
         Order.createNewOrder();
         order = Order.getInstance();
-        SpecialtyActivity.setOrder(order);
-        updateOrderDisplay();
+
+        Toast.makeText(this, "Order successfully placed. Your order number is " + orderNumber + ".", Toast.LENGTH_LONG).show();
+
+        updateOrderDisplay(); // Update the display to show the new order (which should be empty)
     }
 
     public void handleRemovePizza() {
