@@ -75,8 +75,11 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
         holder.pizza_name.setText(pizzaName);
         holder.pizza_price.setText(items.get(position).getUnitPrice());
         holder.im_item.setImageResource(items.get(position).getImage());
+        holder.sauceDisplay.setText("Sauce: " +
+                items.get(position).getSauce().toString());
         holder.toppingsDisplay.setText(items.get(position).toppingsToString());
         holder.createDisplayPizza(pizzaName);
+
     }
 
     /**
@@ -92,7 +95,7 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
      * Get the views from the row layout file, similar to the onCreate() method.
      */
     public static class ItemsHolder extends RecyclerView.ViewHolder {
-        private TextView pizza_name, pizza_price, toppingsDisplay;
+        private TextView pizza_name, pizza_price, toppingsDisplay, sauceDisplay;
         private static final int SMALL_INDEX = 0;
         private static final int MEDIUM_INDEX = 1;
         private static final int LARGE_INDEX = 2;
@@ -115,6 +118,7 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
             btn_add = itemView.findViewById(R.id.btn_add);
             parentLayout = itemView.findViewById(R.id.rowLayout);
             toppingsDisplay = itemView.findViewById(R.id.toppingsDisplay);
+            sauceDisplay = itemView.findViewById(R.id.sauceDisplay);
             sauceBox = itemView.findViewById(R.id.sauceBox);
             cheeseBox = itemView.findViewById(R.id.cheeseBox);
             quantity = itemView.findViewById(R.id.quantityInput);

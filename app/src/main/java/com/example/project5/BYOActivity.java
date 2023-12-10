@@ -139,7 +139,7 @@ public class BYOActivity extends AppCompatActivity {
 
     private void initializeToppingsLists() {
         for (Toppings topping : Toppings.values()) {
-            availableToppings.add(topping.name());
+            availableToppings.add(capitalize(topping.name().toLowerCase().replace('_', ' ')));
         }
     }
 
@@ -191,7 +191,9 @@ public class BYOActivity extends AppCompatActivity {
         priceTextView.setText("$" + priceString);
     }
 
+
     public void addPizzaToOrder() {
+
         Order currentOrder = Order.getInstance();
         currentOrder.addToOrder(buildYourOwn);
         Toast.makeText(this, "Pizza added to order", Toast.LENGTH_SHORT).show();
@@ -199,10 +201,15 @@ public class BYOActivity extends AppCompatActivity {
         resetUI();
     }
 
+    public static String capitalize(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
+    }
+
     private void resetUI() {
-
         pizzaSizeSpinner.setSelection(SMALL_SELECTION);
-
         extraCheeseCheckBox.setChecked(false);
         extraSauceCheckBox.setChecked(false);
 

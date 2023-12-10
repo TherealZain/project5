@@ -1,6 +1,7 @@
 package com.example.project5.pizzas;
 
 
+import com.example.project5.BYOActivity;
 import com.example.project5.enums.Sauce;
 import com.example.project5.enums.Size;
 import com.example.project5.enums.Toppings;
@@ -21,8 +22,7 @@ import java.util.ArrayList;
          */
         public Mexican() {
             toppings = new ArrayList<>();
-            sauce = Sauce.TOMATO; // Assuming tomato sauce; adjust if different
-            // Add typical toppings for a Mexican pizza
+            sauce = Sauce.TOMATO;
             toppings.add(Toppings.GROUND_BEEF);
             toppings.add(Toppings.JALAPENOS);
             toppings.add(Toppings.ONION);
@@ -68,7 +68,6 @@ import java.util.ArrayList;
          */
         @Override
         public void addToppings(Toppings topping) {
-            // Implementation depends on whether you allow extra toppings on Mexican pizza
         }
 
         /**
@@ -79,7 +78,6 @@ import java.util.ArrayList;
          */
         @Override
         public void removeToppings(Toppings topping) {
-            // Implementation depends on whether you allow removal of toppings from Mexican pizza
         }
 
         /**
@@ -95,7 +93,7 @@ import java.util.ArrayList;
                 if (!toppingsString.isEmpty()) {
                     toppingsString += ", ";
                 }
-                toppingsString += topping.name().toLowerCase().replace('_', ' ');
+                toppingsString += BYOActivity.capitalize(topping.name().toLowerCase());
             }
             String sizeString = ", " + size.toString().toLowerCase();
             String sauceString = ", " + sauce.toString().toLowerCase();
