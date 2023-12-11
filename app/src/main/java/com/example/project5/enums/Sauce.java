@@ -7,8 +7,10 @@ package com.example.project5.enums;
  * This enum can be easily expanded to include more sauce types as needed.
  *
  * TOMATO represents the classic tomato sauce, commonly used in various pizza types.
- * ALFREDO represents the creamy Alfredo sauce, offering an alternative to the traditional
- * tomato sauce.
+ * ALFREDO represents the creamy Alfredo sauce, offering an alternative
+ * to the traditional tomato sauce.
+ * BBQ represents barbeque sauce, often used in combination with different kinds
+ * of meat toppings.
  *
  * @author Zain Zulfiqar, Nicholas Yim
  */

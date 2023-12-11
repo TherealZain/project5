@@ -20,6 +20,8 @@ import java.util.ArrayList;
  * in the pizza ordering application.
  * This class allows users to view, add,
  * or remove pizzas from their current order, and place the order.
+ *
+ * @author Zain Zulfiqar, Nicholas Yim
  */
 public class CurrentOrderActivity extends AppCompatActivity {
 

@@ -11,7 +11,7 @@ package com.example.project5.enums;
  *
  * This enum also includes a method to retrieve the additional cost associated with each size.
  *
- * @author studentName1, studentName2 (Include the names of the contributors)
+ * @author Zain Zulfiqar, Nicholas Yim
  */
 public enum Size {
     SMALL(8.99),

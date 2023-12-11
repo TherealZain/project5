@@ -16,6 +16,15 @@ import com.example.project5.pizzas.Pizza;
 
 import java.util.ArrayList;
 
+/**
+ * Activity class for managing and displaying the store orders
+ * in the pizza ordering application.
+ * This class allows the user to view different orders that
+ * have been placed and cancel any of them.
+ *
+ * @author Zain Zulfiqar, Nicholas Yim
+ */
+
 public class StoreOrdersActivity extends AppCompatActivity {
 
     private Spinner orderSelectSpinner;
@@ -27,6 +36,7 @@ public class StoreOrdersActivity extends AppCompatActivity {
     private Button cancelOrderButton;
     private StoreOrders storeOrders;
 
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,32 +53,27 @@ public class StoreOrdersActivity extends AppCompatActivity {
         orderTotalTextView = findViewById(R.id.orderTotalTextView);
         allOrdersListView = findViewById(R.id.allOrdersListView);
         cancelOrderButton = findViewById(R.id.cancelOrderButton);
-
-        populateOrderNumbers(); // Populate the order numbers first
-
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, orderNumbers);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        populateOrderNumbers();
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, orderNumbers);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.
+                simple_spinner_dropdown_item);
         orderSelectSpinner.setAdapter(spinnerAdapter);
-
-        ordersAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, orderDetails);
+        ordersAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, orderDetails);
         allOrdersListView.setAdapter(ordersAdapter);
-
-        orderSelectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        orderSelectSpinner.setOnItemSelectedListener(new AdapterView.
+                OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent,
+                                       View view, int position, long id) {
                 String selectedOrderNumber = orderNumbers.get(position);
                 displaySelectedOrder(selectedOrderNumber);
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // nothing is selected
-            }
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
-
         cancelOrderButton.setOnClickListener(v -> cancelSelectedOrder());
-
-
         if (!orderNumbers.isEmpty()) {
             orderSelectSpinner.setSelection(0);
         }
@@ -99,18 +104,24 @@ public class StoreOrdersActivity extends AppCompatActivity {
             int orderNum = Integer.parseInt(selectedOrderNumber);
             storeOrders.removeOrder(storeOrders.getOrderById(orderNum));
             orderNumbers.remove(selectedPosition);
-            ((ArrayAdapter) orderSelectSpinner.getAdapter()).notifyDataSetChanged();
+            ((ArrayAdapter) orderSelectSpinner.getAdapter()).
+                    notifyDataSetChanged();
 
+            // update spinner selection
             if (!orderNumbers.isEmpty()) {
-                orderSelectSpinner.setSelection(Math.max(0, selectedPosition - 1));
+                int newPosition = Math.max(0, selectedPosition - 1);
+                orderSelectSpinner.setSelection(newPosition);
+                displaySelectedOrder(orderNumbers.get(newPosition));
             } else {
                 orderDetails.clear();
                 ordersAdapter.notifyDataSetChanged();
                 orderTotalTextView.setText("$0.00");
             }
-            Toast.makeText(this, "Order " + orderNum + " cancelled.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Order " + orderNum + " cancelled.",
+                    Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Please select an order to cancel.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please select an order to cancel.",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }
