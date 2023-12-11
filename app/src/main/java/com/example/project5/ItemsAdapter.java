@@ -109,6 +109,14 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
         private Context context;
         View[] pizzaProperties;
 
+
+        /**
+         * Constructor for initializing the ItemsHolder.
+         * Sets up the views and event listeners for each item in the RecyclerView.
+         *
+         * @param itemView The view of the individual list item.
+         * @param context  The context of the application.
+         */
         public ItemsHolder( View itemView, Context context) {
             super(itemView);
             this.context=context;
@@ -127,6 +135,12 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
             setExtraButtonClick(itemView);
         }
 
+        /**
+         * Sets click listeners for the extra sauce and cheese CheckBoxes.
+         * Handles the changes in pizza configuration when these CheckBoxes are clicked.
+         *
+         * @param view The view in which the CheckBoxes are contained.
+         */
         public void setExtraButtonClick(View view){
             sauceBox.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -144,12 +158,22 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
             });
         }
 
-
-
+        /**
+         * Creates and initializes the displayPizza object based on the given pizza name.
+         * This method configures the pizza object for display in the ViewHolder.
+         *
+         * @param pizzaName The name of the pizza to be displayed.
+         */
         private void createDisplayPizza(String pizzaName){
             displayPizza = PizzaMaker.createPizza(pizzaName);
         }
 
+        /**
+         * Populates the spinner with pizza sizes and handles the selection events.
+         * Updates the display pizza object when a different size is selected.
+         *
+         * @param itemView The view containing the spinner.
+         */
         private void populateSpinner(View itemView){
             specialtySpinner = itemView.findViewById(R.id.specialtySizeSpinner);
             String[] sizes = new String[]{"Small", "Medium", "Large"};
@@ -191,7 +215,6 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
                     }
                     alert.setTitle("Do you want to place order?");
                     alert.setMessage(pizza_name.getText().toString());
-                    //handle the "YES" click
                     alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             pizzaProperties = new View[] {pizza_name, pizza_price,sauceBox,cheeseBox, quantity, specialtySpinner};
@@ -200,7 +223,6 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
                                     pizza_name.getText().toString() + " added.", Toast.LENGTH_LONG).show();
                             resetInputs();
                         }
-                        //handle the "NO" click
                     }).setNegativeButton("no", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             Toast.makeText(itemView.getContext(),
@@ -213,11 +235,22 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
             });
         }
 
+        /**
+         * Resets the inputs in the ViewHolder to their default state.
+         * Clears the selections for extra sauce, extra cheese, and quantity.
+         */
         private void resetInputs(){
             sauceBox.setSelected(false);
             cheeseBox.setSelected(false);
             quantity.setText("");
         }
+
+        /**
+         * Checks if the quantity entered is valid.
+         * Displays a toast message if the quantity is invalid.
+         *
+         * @return A boolean indicating whether the quantity is valid.
+         */
         private boolean checkQuantity(){
             Toast quantityNotify = new Toast(context);
             if(quantity.getText().toString().isEmpty()){

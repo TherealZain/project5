@@ -50,14 +50,26 @@ public class Item {
         return unitPrice;
     }
 
+    /**
+     * Getter method for sauce
+     * @return sauce of pizza item
+     */
     public Sauce getSauce() {
         return sauce;
     }
 
+    /**
+     * Setter method for sauce
+     * @param sauce of pizza item
+     */
     public void setSauce(Sauce sauce) {
         this.sauce = sauce;
     }
 
+    /**
+     * Toppings in string form of pizza
+     * @return String of toppings
+     */
     public String toppingsToString() {return toppings.toString();}
 }
 
