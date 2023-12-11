@@ -11,6 +11,8 @@ import java.util.ArrayList;
      * Represents a Mexican pizza, a specialty pizza with a variety of toppings commonly found in Mexican cuisine.
      * This class extends the Pizza class and offers a concrete implementation of its abstract methods,
      * tailored to a Mexican-style pizza.
+     *
+     * @author Zain Zulfiqar, Nicholas Yim
      */
     public class Mexican extends Pizza {
 
@@ -23,7 +25,7 @@ import java.util.ArrayList;
         public Mexican() {
             toppings = new ArrayList<>();
             sauce = Sauce.TOMATO;
-            toppings.add(Toppings.GROUND_BEEF);
+            toppings.add(Toppings.GROUNDBEEF);
             toppings.add(Toppings.JALAPENOS);
             toppings.add(Toppings.ONION);
             toppings.add(Toppings.TOMATOES);
@@ -33,10 +35,11 @@ import java.util.ArrayList;
         }
 
         /**
-         * Calculates and returns the price of the Mexican pizza based on its size.
+         * Calculates and returns the price of the Mexican pizza based on its
+         * size and extra selections.
          * The base price is for a small size and increases for medium and large sizes.
          *
-         * @return double representing the total price of the Mexican pizza.
+         * @return double representing the total price of the Pepperoni pizza.
          */
         @Override
         public double price() {
@@ -56,32 +59,40 @@ import java.util.ArrayList;
             return price;
         }
 
+        /**
+         * Sets the size of the Mexican pizza.
+         * @param newSize The new size to set for the pizza.
+         */
         @Override
         public void setSize(Size newSize) {
             this.size = newSize;
         }
+
         /**
          * Adds a specified topping to the Mexican pizza.
-         * This implementation can be adjusted to allow or disallow adding extra toppings.
-         *
-         * @param topping The topping to be added to the pizza.
+         * This implementation is currently empty as the Hawaiian pizza has predefined toppings.
+         * @param topping The topping to be added (not used).
          */
         @Override
         public void addToppings(Toppings topping) {
+
         }
 
         /**
          * Removes a specified topping from the Mexican pizza.
-         * This implementation can be adjusted to allow or disallow removing toppings.
-         *
-         * @param topping The topping to be removed from the pizza.
+         * This implementation is currently empty as the Hawaiian pizza has predefined toppings.
+         * @param topping The topping to be removed (not used).
          */
         @Override
         public void removeToppings(Toppings topping) {
+
         }
 
         /**
          * Provides a string representation of the Mexican pizza.
+         * The string includes the type of pizza, the list of fixed toppings,
+         * size, sauce, and additional options,
+         * followed by the total price.
          *
          * @return String representing the details of the Mexican pizza.
          */

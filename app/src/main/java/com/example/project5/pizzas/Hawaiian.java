@@ -10,13 +10,16 @@ import java.util.ArrayList;
 /**
  * Represents a Hawaiian pizza, a specific type of pizza in the pizza ordering application.
  * This class extends the Pizza class and is characterized by tomato sauce and specific toppings like ham and pineapple.
+ *
+ * @author Zain Zulfiqar, Nicholas Yim
  */
 public class Hawaiian extends Pizza {
     private static final double HAWAIIAN_SMALL_PRICE = 12.99;
 
 
     /**
-     * Constructor for creating a Hawaiian pizza. Initializes with default tomato sauce and specific toppings.
+     * Constructor for creating a Hawaiian pizza.
+     * Initializes with default tomato sauce and specific toppings.
      */
     public Hawaiian() {
         toppings = new ArrayList<>();
@@ -77,9 +80,12 @@ public class Hawaiian extends Pizza {
     }
 
     /**
-     * Provides a string representation of the Hawaiian pizza, including its type, toppings, size, sauce,
-     * and extra options, followed by the total price.
-     * @return A string representing the details of the Hawaiian pizza.
+     * Provides a string representation of the Hawaiian pizza.
+     * The string includes the type of pizza, the list of fixed toppings,
+     * size, sauce, and additional options,
+     * followed by the total price.
+     *
+     * @return String representing the details of the Hawaiian pizza.
      */
     @Override
     public String toString() {

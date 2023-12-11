@@ -1,5 +1,6 @@
 package com.example.project5.pizzas;
 
+import com.example.project5.BYOActivity;
 import com.example.project5.enums.Sauce;
 import com.example.project5.enums.Size;
 import com.example.project5.enums.Toppings;
@@ -9,12 +10,15 @@ import java.util.ArrayList;
 /**
  * Represents a BBQ Chicken pizza, a specific type of pizza in the pizza ordering application.
  * This class extends the Pizza class and is characterized by BBQ sauce and specific toppings like chicken, onion, and cilantro.
+ *
+ * @author Zain Zulfiqar, Nicholas Yim
  */
 public class BBQChicken extends Pizza {
     private static final double BBQ_CHICKEN_SMALL_PRICE = 15.99;
 
     /**
-     * Constructor for creating a BBQ Chicken pizza. Initializes with default BBQ sauce and toppings.
+     * Constructor for creating a BBQ Chicken pizza.
+     * Initializes with default BBQ sauce and toppings.
      */
     public BBQChicken() {
         toppings = new ArrayList<>();
@@ -76,9 +80,12 @@ public class BBQChicken extends Pizza {
     }
 
     /**
-     * Provides a string representation of the BBQ Chicken pizza, including its type, toppings, size, sauce,
-     * and extra options, followed by the total price.
-     * @return A string representing the details of the BBQ Chicken pizza.
+     * Provides a string representation of the BBQ Chicken pizza.
+     * The string includes the type of pizza, the list of fixed toppings,
+     * size, sauce, and additional options,
+     * followed by the total price.
+     *
+     * @return String representing the details of the BBQ Chicken pizza.
      */
     @Override
     public String toString() {
@@ -88,7 +95,7 @@ public class BBQChicken extends Pizza {
             if (!toppingsString.isEmpty()) {
                 toppingsString += ", ";
             }
-            //toppingsString += BuildOwnController.capitalize(topping.name().toLowerCase().replace('_', ' '));
+            toppingsString += BYOActivity.capitalize(topping.name().toLowerCase());
         }
         String sizeString = ", " + size.toString().toLowerCase();
         String sauceString = ", " + sauce.toString().toLowerCase();

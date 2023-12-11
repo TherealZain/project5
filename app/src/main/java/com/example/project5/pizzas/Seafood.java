@@ -33,10 +33,11 @@ public class Seafood extends Pizza{
     }
 
     /**
-     * Calculates and returns the price of the Seafood pizza based on its size.
+     * Calculates and returns the price of the Seafood pizza based on its
+     * size and extra selections.
      * The base price is for a small size and increases for medium and large sizes.
      *
-     * @return double representing the total price of the Seafood pizza.
+     * @return double representing the total price of the Pepperoni pizza.
      */
     @Override
     public double price() {
