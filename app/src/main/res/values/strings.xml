@@ -21,12 +21,14 @@
         <string name="remove_pizza">Remove Pizza</string>
         <string name="sales_tax">Sales Tax</string>
         <string name="zero_placeholder">$0.00</string>
-        <string name="order_total">Order Total</string>
+        <string name="order_total">Order Total:</string>
         <string name="ru_pizza">RU Pizza</string>
         <string name="specialty_pizza">Specialty Pizza</string>
         <string name="store_orders">Store Orders</string>
         <string name="build_your_own">Build Your Own</string>
         <string name="current_orders">Current Orders</string>
         <string name="cancel_order">Cancel Order</string>
+        <string name="sauce_label">Sauce: %1$s</string>
+        <string name="formatted_price">"$%1$.2f"</string>
 
 </resources>

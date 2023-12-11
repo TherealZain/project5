@@ -66,10 +66,11 @@ public class BYOActivity extends AppCompatActivity {
         setUpSauces();
         setUpToppings();
         priceTextView = findViewById(R.id.priceTextView);
-        String price = String.format("%.2f", buildYourOwn.price());
-        priceTextView.setText("$" + price);
+        String priceString = String.format(getResources().
+                getString(R.string.formatted_price), buildYourOwn.price());
+        priceTextView.setText(priceString);
 
-        Button addToOrderButton = findViewById(R.id.addToOrderButton); // Assuming this is your button ID
+        Button addToOrderButton = findViewById(R.id.addToOrderButton);
         addToOrderButton.setOnClickListener(v -> addPizzaToOrder());
     }
 
@@ -79,11 +80,14 @@ public class BYOActivity extends AppCompatActivity {
     private void setUpSpinner() {
         pizzaSizeSpinner = findViewById(R.id.pizzaSizeSpinner);
         String[] sizes = new String[]{"Small", "Medium", "Large"};
-        ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, sizes);
-        sizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, sizes);
+        sizeAdapter.setDropDownViewResource(android.R.layout.
+                simple_spinner_dropdown_item);
         pizzaSizeSpinner.setAdapter(sizeAdapter);
 
-        pizzaSizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        pizzaSizeSpinner.setOnItemSelectedListener(new AdapterView.
+                OnItemSelectedListener() {
             /**
              * Sets size if new size is selected
              * @param parent The AdapterView where the selection happened
@@ -92,7 +96,8 @@ public class BYOActivity extends AppCompatActivity {
              * @param id The row id of the item that is selected
              */
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
                 String selectedSize = (String) parent.getItemAtPosition(position);
                 Size size = Size.valueOf(selectedSize.toUpperCase());
                 buildYourOwn.setSize(size);
@@ -100,7 +105,7 @@ public class BYOActivity extends AppCompatActivity {
             }
 
             /**
-             * Does nothing when nothing selected
+             * Does nothing when nothing is selected
              * @param parent The AdapterView that now contains no selected item.
              */
             @Override
@@ -118,7 +123,8 @@ public class BYOActivity extends AppCompatActivity {
         RadioButton tomatoRadio = findViewById(R.id.tomatoRadio);
         sauceRadioGroup.check(tomatoRadio.getId());
         buildYourOwn.setSauce(Sauce.TOMATO);
-        sauceRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        sauceRadioGroup.setOnCheckedChangeListener(new RadioGroup.
+                OnCheckedChangeListener() {
 
             /**
              * Changes sauce if different sauce box is checked
@@ -151,20 +157,29 @@ public class BYOActivity extends AppCompatActivity {
     }
 
     /**
-     * Configures the ListViews for available and selected toppings. Sets up adapters and click listeners.
+     * Configures the ListViews for available and selected toppings.
+     * Sets up adapters and click listeners.
      */
     private void setUpToppings() {
         initializeToppingsLists();
-        ListView availableToppingsListView = findViewById(R.id.availableToppingsListView);
-        ListView selectedToppingsListView = findViewById(R.id.selectedToppingsListView);
-        availableToppingsAdapter = new HighlightArrayAdapter(this, android.R.layout.simple_list_item_1, availableToppings);
-        selectedToppingsAdapter = new HighlightArrayAdapter(this, android.R.layout.simple_list_item_1, selectedToppings);
-        setupListViewWithHighlightAdapter(availableToppingsListView, availableToppingsAdapter);
-        setupListViewWithHighlightAdapter(selectedToppingsListView, selectedToppingsAdapter);
+        ListView availableToppingsListView = findViewById(R.id.
+                availableToppingsListView);
+        ListView selectedToppingsListView = findViewById(R.id.
+                selectedToppingsListView);
+        availableToppingsAdapter = new HighlightArrayAdapter(this,
+                android.R.layout.simple_list_item_1, availableToppings);
+        selectedToppingsAdapter = new HighlightArrayAdapter(this,
+                android.R.layout.simple_list_item_1, selectedToppings);
+        setupListViewWithHighlightAdapter(availableToppingsListView,
+                availableToppingsAdapter);
+        setupListViewWithHighlightAdapter(selectedToppingsListView,
+                selectedToppingsAdapter);
         Button addToppingButton = findViewById(R.id.addToppingButton);
         Button removeToppingButton = findViewById(R.id.removeToppingButton);
-        addToppingButton.setOnClickListener(v -> handleAddTopping(availableToppingsListView));
-        removeToppingButton.setOnClickListener(v -> handleRemoveTopping(selectedToppingsListView));
+        addToppingButton.setOnClickListener(v ->
+                handleAddTopping(availableToppingsListView));
+        removeToppingButton.setOnClickListener(v ->
+                handleRemoveTopping(selectedToppingsListView));
     }
 
     /**
@@ -172,7 +187,8 @@ public class BYOActivity extends AppCompatActivity {
      * @param listView The ListView to be set up.
      * @param adapter The ArrayAdapter to be associated with the ListView.
      */
-    private void setupListViewWithHighlightAdapter(ListView listView, ArrayAdapter<String> adapter) {
+    private void setupListViewWithHighlightAdapter(ListView listView,
+                                                   ArrayAdapter<String> adapter) {
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) ->
                 ((HighlightArrayAdapter) adapter).setSelectedPosition(position)
@@ -184,18 +200,20 @@ public class BYOActivity extends AppCompatActivity {
      */
     private void initializeToppingsLists() {
         for (Toppings topping : Toppings.values()) {
-            availableToppings.add(capitalize(topping.name().toLowerCase().replace('_', ' ')));
+            availableToppings.add(capitalize(topping.name().toLowerCase()));
         }
     }
 
     /**
-     * Handles adding a topping to the pizza. Adds the selected topping from available toppings to
+     * Handles adding a topping to the pizza.
+     * Adds the selected topping from available toppings to
      * selected toppings and updates the pizza configuration.
      * @param listView The ListView representing available toppings.
      */
     private void handleAddTopping(ListView listView) {
         if (selectedToppings.size() >= MAX_TOPPINGS) {
-            Toast.makeText(this, "Cannot add more toppings. Maximum of 7 toppings.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Cannot add more toppings. " +
+                    "Maximum of 7 toppings.", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -215,7 +233,8 @@ public class BYOActivity extends AppCompatActivity {
     }
 
     /**
-     * Handles removing a topping from the pizza. Removes the selected topping from selected toppings and
+     * Handles removing a topping from the pizza.
+     * Removes the selected topping from selected toppings and
      * updates the pizza configuration.
      * @param listView The ListView representing selected toppings.
      */
@@ -248,8 +267,9 @@ public class BYOActivity extends AppCompatActivity {
      */
     private void handlePriceChange() {
         double price = buildYourOwn.price();
-        String priceString = String.format("%.2f", price);
-        priceTextView.setText("$" + priceString);
+        String priceString = String.format(getResources().
+                getString(R.string.formatted_price), price);
+        priceTextView.setText(priceString);
     }
 
 
@@ -258,13 +278,14 @@ public class BYOActivity extends AppCompatActivity {
      */
     public void addPizzaToOrder() {
         if(selectedToppings.size() < MIN_TOPPINGS){
-            Toast.makeText(this,
-                    "Must have minimum 3 toppings.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Must have minimum 3 toppings.",
+                    Toast.LENGTH_LONG).show();
             return;
         }
         Order currentOrder = Order.getInstance();
         currentOrder.addToOrder(buildYourOwn);
-        Toast.makeText(this, "Pizza added to order", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Pizza added to order",
+                Toast.LENGTH_SHORT).show();
         resetUI();
     }
 
@@ -281,7 +302,8 @@ public class BYOActivity extends AppCompatActivity {
     }
 
     /**
-     * Resets the UI components to their initial state. Clears any pizza customization made.
+     * Resets the UI components to their initial state.
+     * Clears any pizza customization made.
      */
     private void resetUI() {
         pizzaSizeSpinner.setSelection(SMALL_SELECTION);

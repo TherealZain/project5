@@ -16,9 +16,7 @@ import java.util.ArrayList;
 public class Order {
     private int orderNum;
     private ArrayList<Pizza> pizzaOrders;
-
     private StoreOrders storeOrders= StoreOrders.getInstance();
-
     private static Order currOrderInstance;
     private static final double SALES_TAX_RATE = 0.06625;
 
@@ -27,20 +25,23 @@ public class Order {
      * Constructor for creating a new Order.
      * Initializes the order with a specific order number
      * and an empty list of pizzas.
-     *
      */
     private Order() {
         this.orderNum = StoreOrders.getInstance().getNextOrderNum();
         pizzaOrders = new ArrayList<>();
     }
 
+    /**
+     * Gets the instance of the current order.
+     *
+     * @return the currOrderInstance as an Order
+     */
     public static Order getInstance() {
         if (currOrderInstance == null) {
             currOrderInstance = new Order();
         }
         return currOrderInstance;
     }
-
 
     /**
      * Adds a Pizza to the order.
@@ -55,7 +56,6 @@ public class Order {
 
     public static void createNewOrder(){
         currOrderInstance = new Order();
-
     }
 
     /**
@@ -64,7 +64,7 @@ public class Order {
      *
      * @return The order number as an integer.
      */
-    public int getOrderNum(){return orderNum;}
+    public int getOrderNum() { return orderNum; }
     /**
      * Gets the list of pizzas in the order.
      * This method returns an ArrayList containing all the pizzas added to the order.
@@ -73,12 +73,17 @@ public class Order {
      */
     public ArrayList<Pizza> getPizzas(){return pizzaOrders;}
 
+    /**
+     * Removes the selected pizza from the pizzaOrders ArrayList.
+     * @param pizzaIndex
+     * @return true if pizza is removed, false otherwise
+     */
     public boolean removePizza(int pizzaIndex){
         if (pizzaIndex >= 0 && pizzaIndex < pizzaOrders.size()) {
             pizzaOrders.remove(pizzaIndex);
-            return true; // Successfully removed
+            return true;
         }
-        return false; // Removal failed
+        return false;
     }
 
     /**

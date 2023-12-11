@@ -26,7 +26,8 @@ import java.util.ArrayList;
 public class CurrentOrderActivity extends AppCompatActivity {
 
     private ListView pizzaListView;
-    private TextView orderNumberTextView, subTotalTextView, salesTaxTextView, orderTotalTextView;
+    private TextView orderNumberTextView, subTotalTextView,
+            salesTaxTextView, orderTotalTextView;
     private Button placeOrderButton, removePizzaButton;
     private ArrayAdapter<String> pizzaAdapter;
     private ArrayList<String> pizzaList;
@@ -61,11 +62,12 @@ public class CurrentOrderActivity extends AppCompatActivity {
         pizzaListView = findViewById(R.id.pizzaListView);
         placeOrderButton = findViewById(R.id.placeOrderButton);
         removePizzaButton = findViewById(R.id.removePizzaButton);
-        pizzaAdapter = new HighlightArrayAdapter(this, android.R.layout.simple_list_item_1, pizzaList);
+        pizzaAdapter = new HighlightArrayAdapter(this,
+                android.R.layout.simple_list_item_1, pizzaList);
         pizzaListView.setAdapter(pizzaAdapter);
         pizzaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             /**
-             * Sets selected position when a item is clicked
+             * Sets selected position when an item is clicked
              * @param parent The AdapterView where the click happened.
              * @param view The view within the AdapterView that was clicked (this
              *            will be a view provided by the adapter)
@@ -73,8 +75,10 @@ public class CurrentOrderActivity extends AppCompatActivity {
              * @param id The row id of the item that was clicked.
              */
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((HighlightArrayAdapter)pizzaAdapter).setSelectedPosition(position);
+            public void onItemClick(AdapterView<?> parent,
+                                    View view, int position, long id) {
+                ((HighlightArrayAdapter)pizzaAdapter).
+                        setSelectedPosition(position);
             }
         });
         placeOrderButton.setOnClickListener(new View.OnClickListener() {
@@ -100,13 +104,14 @@ public class CurrentOrderActivity extends AppCompatActivity {
     }
 
     /**
-     * Handles the action for placing an order. Validates the order and updates the StoreOrders singleton.
+     * Handles the action for placing an order.
+     * Validates the order and updates the StoreOrders singleton.
      * Displays a Toast message on successful placement of the order.
      */
     public void handlePlaceOrder() {
         if (pizzaList.isEmpty()) {
-            Toast.makeText(this, "No pizzas in the order. Please add pizzas " +
-                    "before placing the order.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No pizzas in the order. Please add " +
+                    "pizzas before placing the order.", Toast.LENGTH_LONG).show();
             return;
         }
         int orderNumber = order.getOrderNum();
@@ -114,13 +119,15 @@ public class CurrentOrderActivity extends AppCompatActivity {
         Order.createNewOrder();
         order = Order.getInstance();
         SpecialtyActivity.setOrder(order);
-        Toast.makeText(this, "Order successfully placed. Your order number is " + orderNumber + ".", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Order successfully placed. Your order number " +
+                "is " + orderNumber + ".", Toast.LENGTH_LONG).show();
         updateOrderDisplay();
     }
 
     /**
      * Handles the action for removing a selected pizza from the order.
-     * Updates the order and the pizza list view. Displays a Toast message on successful removal.
+     * Updates the order and the pizza list view. Displays a Toast message
+     * on successful removal.
      */
     public void handleRemovePizza() {
         int selectedPosition = ((HighlightArrayAdapter)
@@ -140,7 +147,8 @@ public class CurrentOrderActivity extends AppCompatActivity {
     }
 
     /**
-     * Updates the display of the current order, including the list of pizzas and order totals.
+     * Updates the display of the current order,
+     * including the list of pizzas and order totals.
      */
     private void updateOrderDisplay() {
         pizzaAdapter.clear();
@@ -173,13 +181,16 @@ public class CurrentOrderActivity extends AppCompatActivity {
         double salesTax = Math.round((subTotal*SALES_TAX_RATE)*100.0)/100.0;
         double totalCost = Math.round((subTotal + salesTax)*100.0)/100.0;
         String orderNumString = Integer.toString(order.getOrderNum());
-        String subTotalString = String.format("%.2f", subTotal);
-        String salesTaxString = String.format("%.2f", salesTax);
-        String totalString = String.format("%.2f", totalCost);
+        String subTotalString = String.format(getResources().
+                getString(R.string.formatted_price), subTotal);
+        String salesTaxString = String.format(getResources().
+                getString(R.string.formatted_price), salesTax);
+        String totalString = String.format(getResources().
+                getString(R.string.formatted_price), totalCost);
         orderTotalTextView.setText(orderNumString);
-        subTotalTextView.setText("$" + subTotalString);
-        salesTaxTextView.setText("$" + salesTaxString);
-        orderTotalTextView.setText("$" + totalString);
+        subTotalTextView.setText(subTotalString);
+        salesTaxTextView.setText(salesTaxString);
+        orderTotalTextView.setText(totalString);
     }
 
 }

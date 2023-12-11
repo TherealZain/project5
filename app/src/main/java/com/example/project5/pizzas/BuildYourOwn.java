@@ -77,7 +77,7 @@ public class BuildYourOwn extends Pizza{
             price += Size.LARGE.getPriceAdd();
         }
         if(toppings.size() > MAX_TOPPINGS){
-            price += (toppings.size() - MAX_TOPPINGS)*EXTRA_TOPPING_COST;
+            price += (toppings.size() - MAX_TOPPINGS) * EXTRA_TOPPING_COST;
         }
         if(extraCheese){
             price++;

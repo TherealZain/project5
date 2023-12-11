@@ -36,7 +36,13 @@ public class StoreOrdersActivity extends AppCompatActivity {
     private Button cancelOrderButton;
     private StoreOrders storeOrders;
 
-    
+
+    /**
+     * Initializes the activity. Sets the content view and configures UI components.
+     * @param savedInstanceState If the activity is being re-initialized after previously being
+     *                           shut down, this Bundle contains the data it most recently
+     *                           supplied in onSaveInstanceState(Bundle). Otherwise, it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +54,9 @@ public class StoreOrdersActivity extends AppCompatActivity {
         setupViews();
     }
 
+    /**
+     * Sets up the views and UI components used in the activity.
+     */
     private void setupViews() {
         orderSelectSpinner = findViewById(R.id.orderSelectSpinner);
         orderTotalTextView = findViewById(R.id.orderTotalTextView);
@@ -64,12 +73,27 @@ public class StoreOrdersActivity extends AppCompatActivity {
         allOrdersListView.setAdapter(ordersAdapter);
         orderSelectSpinner.setOnItemSelectedListener(new AdapterView.
                 OnItemSelectedListener() {
+            /**
+             * Calls display method to display selected order
+             * when a spinner item is selected.
+             * @param parent The AdapterView where the selection happened.
+             * @param view The view within the AdapterView that was clicked (this
+             *            will be a view provided by the adapter)
+             * @param position The position of the view in the adapter.
+             * @param id The row id of the item that was selected.
+             */
             @Override
             public void onItemSelected(AdapterView<?> parent,
                                        View view, int position, long id) {
                 String selectedOrderNumber = orderNumbers.get(position);
                 displaySelectedOrder(selectedOrderNumber);
             }
+
+            /**
+             * Invoked when spinner selection disappears from the view.
+             * Not used in this case.
+             * @param parent The AdapterView that now contains no selected item.
+             */
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }
         });
@@ -79,12 +103,20 @@ public class StoreOrdersActivity extends AppCompatActivity {
         }
     }
 
+
+    /**
+     * Populates the spinner with order numbers from the StoreOrders instance.
+     */
     private void populateOrderNumbers() {
         for (Order order : storeOrders.getOrders()) {
             orderNumbers.add(String.valueOf(order.getOrderNum()));
         }
     }
 
+    /**
+     * Displays details of the selected order in the ListView.
+     * @param orderNumber Order number of the selected order as a String.
+     */
     private void displaySelectedOrder(String orderNumber) {
         int orderNum = Integer.parseInt(orderNumber);
         Order selectedOrder = storeOrders.getOrderById(orderNum);
@@ -97,6 +129,10 @@ public class StoreOrdersActivity extends AppCompatActivity {
 
         orderTotalTextView.setText("$" + selectedOrder.getOrderTotal());
     }
+
+    /**
+     * Cancels (removes) the selected order and updates the UI accordingly.
+     */
     private void cancelSelectedOrder() {
         int selectedPosition = orderSelectSpinner.getSelectedItemPosition();
         if (selectedPosition >= 0 && selectedPosition < orderNumbers.size()) {
@@ -115,7 +151,7 @@ public class StoreOrdersActivity extends AppCompatActivity {
             } else {
                 orderDetails.clear();
                 ordersAdapter.notifyDataSetChanged();
-                orderTotalTextView.setText("$0.00");
+                orderTotalTextView.setText(getString(R.string.zero_placeholder));
             }
             Toast.makeText(this, "Order " + orderNum + " cancelled.",
                     Toast.LENGTH_SHORT).show();
