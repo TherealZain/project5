@@ -30,5 +30,6 @@
         <string name="cancel_order">Cancel Order</string>
         <string name="sauce_label">Sauce: %1$s</string>
         <string name="formatted_price">"$%1$.2f"</string>
+        <string name="order_total_format">$%s</string>
 
 </resources>

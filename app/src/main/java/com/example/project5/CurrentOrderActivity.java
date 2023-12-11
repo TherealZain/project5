@@ -163,6 +163,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
                 }
             }
         }
+        assert order != null;
         calculateTotals(order.getPizzas());
     }
 

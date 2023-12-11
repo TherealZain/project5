@@ -126,8 +126,8 @@ public class StoreOrdersActivity extends AppCompatActivity {
             orderDetails.add(pizza.toString());
         }
         ordersAdapter.notifyDataSetChanged();
-
-        orderTotalTextView.setText("$" + selectedOrder.getOrderTotal());
+        orderTotalTextView.setText(getString(R.string.order_total_format,
+                selectedOrder.getOrderTotal()));
     }
 
     /**
@@ -140,7 +140,7 @@ public class StoreOrdersActivity extends AppCompatActivity {
             int orderNum = Integer.parseInt(selectedOrderNumber);
             storeOrders.removeOrder(storeOrders.getOrderById(orderNum));
             orderNumbers.remove(selectedPosition);
-            ((ArrayAdapter) orderSelectSpinner.getAdapter()).
+            ((ArrayAdapter<?>) orderSelectSpinner.getAdapter()).
                     notifyDataSetChanged();
 
             // update spinner selection

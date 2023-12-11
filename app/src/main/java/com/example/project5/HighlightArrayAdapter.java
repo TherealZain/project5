@@ -9,8 +9,10 @@ import android.widget.ArrayAdapter;
 import java.util.List;
 
 /**
- * An ArrayAdapter extension that allows for highlighting the selected item in a list.
- * This class is used to visually distinguish the currently selected item from other items in a list view.
+ * An ArrayAdapter extension that allows for
+ * highlighting the selected item in a list.
+ * This class is used to visually distinguish the
+ * currently selected item from other items in a list view.
  *
  * @author Zain Zulfiqar, Nicholas Yim
  */
@@ -21,17 +23,21 @@ public class HighlightArrayAdapter extends ArrayAdapter<String> {
      * Constructor for HighlightArrayAdapter.
      *
      * @param context  The current context.
-     * @param resource The resource ID for a layout file containing a layout to use when instantiating views.
+     * @param resource The resource ID for a layout file containing
+     *                 a layout to use when instantiating views.
      * @param objects  The objects to represent in the ListView.
      */
-    public HighlightArrayAdapter(Context context, int resource, List<String> objects) {
+    public HighlightArrayAdapter(Context context,
+                                 int resource, List<String> objects) {
         super(context, resource, objects);
     }
 
     /**
-     * Sets the selected position in the list and notifies the adapter that the data set has changed.
+     * Sets the selected position in the list
+     * and notifies the adapter that the data set has changed.
      *
-     * @param position The position of the item within the adapter's data set to be highlighted.
+     * @param position The position of the item within the adapter's
+     *                 data set to be highlighted.
      */
     public void setSelectedPosition(int position) {
         selectedPosition = position;
@@ -50,7 +56,8 @@ public class HighlightArrayAdapter extends ArrayAdapter<String> {
      * Gets a View that displays the data at the specified position in the data set.
      * Highlights the view if it is the selected position.
      *
-     * @param position    The position of the item within the adapter's data set of the item whose view we want.
+     * @param position    The position of the item within the adapter's data set
+     *                    of the item whose view we want.
      * @param convertView The old view to reuse, if possible.
      * @param parent      The parent that this view will eventually be attached to.
      * @return A View corresponding to the data at the specified position.
