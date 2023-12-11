@@ -38,6 +38,8 @@ import java.util.ArrayList;
  * The ItemsHolder class must extend RecyclerView.ViewHolder. In the constructor of this class,
  * you do something similar to the onCreate() method in an Activity.
  * @author Lily Chang
+ *
+ * @author Nicholas Yim, Zain Zulfiqar
  */
 class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
     private Context context; //need the context to inflate the layout
@@ -64,22 +66,23 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
     }
 
     /**
-     * Assign data values for each row according to their "position" (index) when the item becomes
-     * visible on the screen.
+     * Assign data values for each row according to their "position" (index)
+     * when the item becomes visible on the screen.
      * @param holder the instance of ItemsHolder
      * @param position the index of the item in the list of items
      */
     @Override
     public void onBindViewHolder( ItemsHolder holder, int position) {
         String pizzaName = items.get(position).getItemName();
+        String sauce = items.get(position).getSauce().toString();
+
         holder.pizza_name.setText(pizzaName);
         holder.pizza_price.setText(items.get(position).getUnitPrice());
         holder.im_item.setImageResource(items.get(position).getImage());
-        holder.sauceDisplay.setText("Sauce: " +
-                items.get(position).getSauce().toString());
+
+        holder.sauceDisplay.setText(context.getString(R.string.sauce_label, sauce));
         holder.toppingsDisplay.setText(items.get(position).toppingsToString());
         holder.createDisplayPizza(pizzaName);
-
     }
 
     /**
@@ -143,6 +146,12 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
          */
         public void setExtraButtonClick(View view){
             sauceBox.setOnClickListener(new View.OnClickListener() {
+                /**
+                 * Toggles the state of extra sauce for the pizza, updates pizza price.
+                 * Called when the extra sauce CheckBox is clicked.
+                 *
+                 * @param view The view that was clicked (extra sauce CheckBox).
+                 */
                 @Override
                 public void onClick(View view){
                     displayPizza.setExtraSauce(sauceBox.isChecked());
@@ -150,6 +159,12 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
                 }
             });
             cheeseBox.setOnClickListener(new View.OnClickListener() {
+                /**
+                 * Toggles the state of extra cheese for the pizza, updates pizza price.
+                 * Called when the extra cheese CheckBox is clicked.
+                 *
+                 * @param view The view that was clicked (extra cheese CheckBox).
+                 */
                 @Override
                 public void onClick(View view){
                     displayPizza.setExtraCheese(cheeseBox.isChecked());
@@ -177,12 +192,24 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
         private void populateSpinner(View itemView){
             specialtySpinner = itemView.findViewById(R.id.specialtySizeSpinner);
             String[] sizes = new String[]{"Small", "Medium", "Large"};
-            ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, sizes);
-            sizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(context,
+                    android.R.layout.simple_spinner_item, sizes);
+            sizeAdapter.setDropDownViewResource(android.R.layout.
+                    simple_spinner_dropdown_item);
             specialtySpinner.setAdapter(sizeAdapter);
-            specialtySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            specialtySpinner.setOnItemSelectedListener(new AdapterView.
+                    OnItemSelectedListener() {
+                /**
+                 * Selects size based on user selection in pizza size spinner.
+                 *
+                 * @param parent The AdapterView where the selection happened
+                 * @param view The view within the AdapterView that was clicked
+                 * @param position The position of the view in the adapter
+                 * @param id The row id of the item that is selected
+                 */
                 @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                public void onItemSelected(AdapterView<?> parent,
+                                           View view, int position, long id) {
                     switch (position) {
                         case SMALL_INDEX:
                             displayPizza.setSize(Size.SMALL);
@@ -196,6 +223,13 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
                     }
                     pizza_price.setText(String.format("%.2f", displayPizza.price()));
                 }
+
+                /**
+                 * Invoked when nothing is selected in the spinner.
+                 * Not used in this context.
+                 *
+                 * @param parent The AdapterView that now contains no selected item.
+                 */
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {}
             });
@@ -203,30 +237,55 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
         /**
          * Set the onClickListener for the button on each row.
          * Clicking on the button will create an AlertDialog with the options of YES/NO.
-         * @param itemView
+         * @param itemView as View
          */
-        private void setAddButtonOnClick( View itemView) {
+        private void setAddButtonOnClick(View itemView) {
             btn_add.setOnClickListener(new View.OnClickListener() {
+                /**
+                 * Handles the click event on the 'Add to Order' button.
+                 * Presents a confirmation dialog and processes the user's
+                 * response of 'yes' or 'no'.
+                 *
+                 * @param view The view that was clicked ('Add to Order' button).
+                 */
                 @Override
                 public void onClick(View view) {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
+                    AlertDialog.Builder alert =
+                            new AlertDialog.Builder(itemView.getContext());
                     if(!checkQuantity()){
                         return;
                     }
                     alert.setTitle("Do you want to place order?");
                     alert.setMessage(pizza_name.getText().toString());
                     alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        /**
+                         * Handles the click on the 'YES' button in the dialog.
+                         * Adds the pizza to the order, resets input fields.
+                         *
+                         * @param dialog the dialog that received the click
+                         * @param which the button that was clicked
+                         */
                         public void onClick(DialogInterface dialog, int which) {
-                            pizzaProperties = new View[] {pizza_name, pizza_price,sauceBox,cheeseBox, quantity, specialtySpinner};
+                            pizzaProperties = new View[] {pizza_name, pizza_price,
+                                    sauceBox, cheeseBox, quantity, specialtySpinner};
                             SpecialtyActivity.addPizzaToOrder(pizzaProperties);
                             Toast.makeText(itemView.getContext(),
-                                    pizza_name.getText().toString() + " added.", Toast.LENGTH_LONG).show();
+                                    pizza_name.getText().toString() +
+                                            " added.", Toast.LENGTH_LONG).show();
                             resetInputs();
                         }
                     }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+                        /**
+                         * Handles the click on the 'NO' button in the dialog.
+                         * Displays a Toast message indicating that the pizza was not added.
+                         *
+                         * @param dialog the dialog that received the click
+                         * @param which the button that was clicked
+                         */
                         public void onClick(DialogInterface dialog, int which) {
                             Toast.makeText(itemView.getContext(),
-                                    pizza_name.getText().toString() + " not added.", Toast.LENGTH_LONG).show();
+                                    pizza_name.getText().toString() + " not added.",
+                                    Toast.LENGTH_LONG).show();
                         }
                     });
                     AlertDialog dialog = alert.create();

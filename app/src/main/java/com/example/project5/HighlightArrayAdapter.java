@@ -11,6 +11,8 @@ import java.util.List;
 /**
  * An ArrayAdapter extension that allows for highlighting the selected item in a list.
  * This class is used to visually distinguish the currently selected item from other items in a list view.
+ *
+ * @author Zain Zulfiqar, Nicholas Yim
  */
 public class HighlightArrayAdapter extends ArrayAdapter<String> {
     private int selectedPosition = -1;

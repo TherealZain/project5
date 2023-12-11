@@ -10,6 +10,8 @@ import android.view.View;
  * This class serves as the entry point and main menu for the application,
  * providing navigation to various features such as building your own pizza,
  * selecting specialty pizzas, viewing the current order, and viewing store orders.
+ *
+ * @author Zain Zulfiqar, Nicholas Yim
  */
 public class MainActivity extends AppCompatActivity {
 

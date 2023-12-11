@@ -34,30 +34,31 @@ public class PizzaMaker {
      * @return Pizza type of pizzaType
      */
     public static Pizza createPizza(String pizzaType) {
-        if (pizzaType.equals("BYO")) {
-            return new BuildYourOwn();
-        } else if (pizzaType.equals("Deluxe")) {
-            return new Deluxe();
-        } else if (pizzaType.equals("Supreme")) {
-            return new Supreme();
-        } else if (pizzaType.equals("Meatzza")) {
-            return new Meatzza();
-        } else if (pizzaType.equals("Seafood")) {
-            return new Seafood();
-        } else if (pizzaType.equals("Pepperoni")) {
-            return new Pepperoni();
-        } else if (pizzaType.equals("BBQ Chicken")){
-            return new BBQChicken();
-        } else if (pizzaType.equals("Hawaiian")) {
-            return new Hawaiian();
-        } else if (pizzaType.equals("Margherita")) {
-            return new Margherita();
-        } else if (pizzaType.equals("Mexican")) {
-            return new Mexican();
-        } else if (pizzaType.equals("Veggie")) {
-            return new Veggie();
-        } else {
-            throw new IllegalArgumentException("Unknown pizza type: " + pizzaType);
+        switch (pizzaType) {
+            case "BYO":
+                return new BuildYourOwn();
+            case "Deluxe":
+                return new Deluxe();
+            case "Supreme":
+                return new Supreme();
+            case "Meatzza":
+                return new Meatzza();
+            case "Seafood":
+                return new Seafood();
+            case "Pepperoni":
+                return new Pepperoni();
+            case "BBQ Chicken":
+                return new BBQChicken();
+            case "Hawaiian":
+                return new Hawaiian();
+            case "Margherita":
+                return new Margherita();
+            case "Mexican":
+                return new Mexican();
+            case "Veggie":
+                return new Veggie();
+            default:
+                throw new IllegalArgumentException("Unknown pizza type: " + pizzaType);
         }
     }
 }

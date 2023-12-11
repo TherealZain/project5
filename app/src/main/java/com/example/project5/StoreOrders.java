@@ -29,6 +29,10 @@ public class StoreOrders {
         storeOrders = new ArrayList<>();
     }
 
+    /**
+     * Gets the instance of store orders
+     * @return instance as a StoreOrders object
+     */
     public static StoreOrders getInstance() {
         if (instance == null) {
             instance = new StoreOrders();
@@ -47,10 +51,21 @@ public class StoreOrders {
         return nextOrderNum;
     }
 
+    /**
+     * Gets the list of store orders
+     * @return The store orders as an ArrayList<Order>
+     */
     public ArrayList<Order> getOrders(){
         return storeOrders;
     }
 
+    /**
+     * Adds order from current order to store orders
+     * Puts the current order into the array of orders
+     * displayed in store order.
+     * @param order as Order
+     * @return true if order is successfully added, false if not
+     */
     public boolean addOrder(Order order){
         if(order != null && !order.getPizzas().isEmpty()){
             storeOrders.add(order);
@@ -59,11 +74,6 @@ public class StoreOrders {
         }
         return false;
     }
-
-    /**
-     * exports all orders in to a test file for employee use
-     * @param stage where FileChooser will open
-     */
 
     /**
      * Checks if storeOrders contains any orders
@@ -89,7 +99,7 @@ public class StoreOrders {
     /**
      * Gets order by order number
      * @param id of order
-     * @return order associated with ID
+     * @return order associated with ID, null if not present
      */
     public Order getOrderById(int id) {
         for (Order order : storeOrders) {
