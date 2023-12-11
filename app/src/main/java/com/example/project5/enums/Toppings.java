@@ -21,6 +21,15 @@ package com.example.project5.enums;
  * - CRABMEAT
  * - PINEAPPLE
  * - CHICKEN
+ * - CILANTRO
+ * - MOZZARELLA
+ * - TOMATOES
+ * - BASIL
+ * - GROUNDBEEF
+ * - JALAPENOS
+ * - CORN
+ * - AVOCADO
+ * - CHEDDAR
  *
  * This enumeration allows for easy expansion to include more toppings as needed.
  *

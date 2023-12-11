@@ -20,18 +20,18 @@ import com.example.project5.pizzas.Veggie;
  * It acts as a central point for creating instances of pizza subclasses
  * like BuildYourOwn, Deluxe, Supreme, Meatzza, Seafood, and Pepperoni.
  *
- * The createPizza method takes a string that identifies the type of pizza to be created and
- * returns an instance of the corresponding Pizza subclass.
+ * The createPizza method takes a string that identifies the type of pizza to
+ * be created and returns an instance of the corresponding Pizza subclass.
  *
  * @author Zain Zulfiqar, Nicholas Yim
  */
 public class PizzaMaker {
 
     /**
-     * Creates new instance of pizza based on pizzaType provided, this is a factory method,
-     * Other controllers use this method to create pizzas
-     * @param pizzaType
-     * @return Pizza type of pizzaType
+     * Creates new instance of pizza based on pizzaType provided.
+     * This is a factory method; other controllers use this method to create pizzas
+     * @param pizzaType Type of pizza as a String
+     * @return Specific Pizza object as Pizza
      */
     public static Pizza createPizza(String pizzaType) {
         switch (pizzaType) {

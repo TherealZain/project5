@@ -44,6 +44,8 @@ public class BYOActivity extends AppCompatActivity {
     private static final int MAX_TOPPINGS = 7;
     private static final int MIN_TOPPINGS = 3;
     private static final int SMALL_SELECTION = 0;
+    private static final int NULL_SELECTION = -1;
+
 
     /**
      * Called when the activity is starting. This is where most initialization should go.
@@ -229,7 +231,8 @@ public class BYOActivity extends AppCompatActivity {
             listView.setItemChecked(position, false);
             handlePriceChange();
         }
-        ((HighlightArrayAdapter) availableToppingsAdapter).setSelectedPosition(-1);
+        ((HighlightArrayAdapter) availableToppingsAdapter).
+                setSelectedPosition(NULL_SELECTION);
     }
 
     /**
@@ -251,7 +254,8 @@ public class BYOActivity extends AppCompatActivity {
             listView.setItemChecked(position, false);
             handlePriceChange();
         }
-        ((HighlightArrayAdapter) selectedToppingsAdapter).setSelectedPosition(-1);
+        ((HighlightArrayAdapter) selectedToppingsAdapter).
+                setSelectedPosition(NULL_SELECTION);
     }
 
     /**

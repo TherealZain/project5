@@ -19,6 +19,7 @@ import android.widget.Toast;
 import android.os.Bundle;
 
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,12 +53,14 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
 
     /**
      * This method will inflate the row layout for the items in the RecyclerView
-     * @param parent
-     * @param viewType
-     * @return
+     * @param parent The ViewGroup into which the new View will be added after
+     *               it is bound to an adapter position.
+     * @param viewType The view type of the new View.
+     * @return ItemsHolder(view, context)
      */
+    @NonNull
     @Override
-    public ItemsHolder onCreateViewHolder( ViewGroup parent, int viewType) {
+    public ItemsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflate the row layout for the items
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_view, parent, false);
@@ -80,7 +83,8 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
         holder.pizza_price.setText(items.get(position).getUnitPrice());
         holder.im_item.setImageResource(items.get(position).getImage());
 
-        holder.sauceDisplay.setText(context.getString(R.string.sauce_label, sauce));
+        holder.sauceDisplay.setText(context.getString(R.string.
+                sauce_label, sauce));
         holder.toppingsDisplay.setText(items.get(position).toppingsToString());
         holder.createDisplayPizza(pizzaName);
     }
@@ -91,7 +95,7 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
      */
     @Override
     public int getItemCount() {
-        return items.size(); //number of MenuItem in the array list.
+        return items.size();
     }
 
     /**

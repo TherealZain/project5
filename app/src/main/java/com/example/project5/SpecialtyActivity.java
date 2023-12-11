@@ -100,13 +100,12 @@ public class SpecialtyActivity extends AppCompatActivity {
     public static void setOrder(Order newOrder){currOrder = newOrder;}
 
     /**
-     * Fills displays and adds the 5 original Specialty pizzas by creating custom Items,
-     * including pizza details (name, image, price, toppings, sauce).
+     * Fills displays and adds the 5 original Specialty pizzas
+     * by creating custom Items, including pizza details
+     * (name, image, price, toppings, sauce).
      * Pizzas include: Deluxe, Meatzza, Pepperoni, Seafood, Supreme
-     *
-     * @return pizzaDisplays as ArrayList<Item>
      */
-    private ArrayList<Item> fillItemArrays(){
+    private void fillItemArrays(){
         Pizza deluxe = PizzaMaker.createPizza("Deluxe");
         Pizza meatzza = PizzaMaker.createPizza("Meatzza");
         Pizza pepperoni = PizzaMaker.createPizza("Pepperoni");
@@ -132,16 +131,13 @@ public class SpecialtyActivity extends AppCompatActivity {
         pizzaDisplays.add(pepperoniItem);
         pizzaDisplays.add(seafoodItem);
         pizzaDisplays.add(supremeItem);
-        return pizzaDisplays;
     }
 
     /**
-     * Fills displays and adds the 5 additional Specialty pizzas by creating custom Items,
-     * including pizza details (name, image, price, toppings, sauce).
+     * Fills displays and adds the 5 additional Specialty pizzas
+     * by creating custom Items, including pizza details
+     * (name, image, price, toppings, sauce).
      * Pizzas include: BBQ Chicken, Hawaiian, Margherita, Mexican, Veggie
-     *
-     * Nothing is returned since these pizzas are added to the already
-     * existing/altered pizzaDisplays ArrayList.
      */
     private void addNewSpecialtyPizzas(){
         Pizza bbqChicken = PizzaMaker.createPizza("BBQ Chicken");

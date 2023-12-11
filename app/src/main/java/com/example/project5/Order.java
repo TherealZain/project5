@@ -67,23 +67,22 @@ public class Order {
     public int getOrderNum() { return orderNum; }
     /**
      * Gets the list of pizzas in the order.
-     * This method returns an ArrayList containing all the pizzas added to the order.
+     * This method returns an ArrayList containing all the
+     * pizzas added to the order.
      *
      * @return An ArrayList of Pizza objects.
      */
-    public ArrayList<Pizza> getPizzas(){return pizzaOrders;}
+    public ArrayList<Pizza> getPizzas() { return pizzaOrders; }
 
     /**
      * Removes the selected pizza from the pizzaOrders ArrayList.
-     * @param pizzaIndex
-     * @return true if pizza is removed, false otherwise
+     *
+     * @param pizzaIndex The index of the pizza to be removed
      */
-    public boolean removePizza(int pizzaIndex){
+    public void removePizza(int pizzaIndex){
         if (pizzaIndex >= 0 && pizzaIndex < pizzaOrders.size()) {
             pizzaOrders.remove(pizzaIndex);
-            return true;
         }
-        return false;
     }
 
     /**
@@ -99,6 +98,7 @@ public class Order {
         }
         double salesTax = Math.round((subTotal*SALES_TAX_RATE)*100.0)/100.0;
         double totalCost = Math.round((subTotal + salesTax)*100.0)/100.0;
+
         return String.format("%.2f", totalCost);
     }
 
